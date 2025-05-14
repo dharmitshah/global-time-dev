@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/bb1c26dd-e814-4ee6-9f9f-5f605ff7d9a0
+**URL**: https://syncmyclock.com/
 
 ## How can I edit this code?
 
