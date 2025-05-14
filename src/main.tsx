@@ -7,11 +7,11 @@ import './index.css'
 const metaTags = [
   { name: "description", content: "DevTimeZone - The ultimate tool for managing global team schedules and time zone conversions" },
   { name: "keywords", content: "time zone converter, meeting scheduler, global team, developer tools, time management" },
-  { property: "og:title", content: "DevTimeZone - Global Team Meeting Scheduler & Time Zone Converter" },
+  { property: "og:title", content: "DevTimeZone - Developer Time Conversion Tool" },
   { property: "og:description", content: "Find the perfect meeting times for your distributed team and convert time zones instantly" },
   { property: "og:type", content: "website" },
   { name: "twitter:card", content: "summary_large_image" },
-  { name: "twitter:title", content: "DevTimeZone - Global Team Management" },
+  { name: "twitter:title", content: "DevTimeZone - Developer Time Tool" },
   { name: "twitter:description", content: "The ultimate tool for managing global team schedules and time zone conversions" }
 ];
 
@@ -45,6 +45,6 @@ scriptTag.text = JSON.stringify(jsonLd);
 document.head.appendChild(scriptTag);
 
 // Update document title
-document.title = "DevTimeZone - Global Team Meeting Scheduler & Time Converter";
+document.title = "DevTimeZone - Developer Time Conversion Tool";
 
 createRoot(document.getElementById("root")!).render(<App />);
