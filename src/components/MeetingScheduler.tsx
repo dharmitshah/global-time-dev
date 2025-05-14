@@ -488,7 +488,7 @@ const MeetingScheduler = () => {
                 </div>
                 <div className="flex items-center gap-1">
                   <div className="w-3 h-3 bg-yellow-900/10 rounded"></div>
-                  <span>Good time (>50%)</span>
+                  <span>Good time (&gt;50%)</span>
                 </div>
               </div>
               
