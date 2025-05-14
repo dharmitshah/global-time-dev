@@ -10,9 +10,11 @@ const metaTags = [
   { property: "og:title", content: "DevTimeZone - Developer Time Conversion Tool" },
   { property: "og:description", content: "Find the perfect meeting times for your distributed team and convert time zones instantly" },
   { property: "og:type", content: "website" },
+  { property: "og:url", content: "https://global-time-dev.lovable.app/" },
   { name: "twitter:card", content: "summary_large_image" },
   { name: "twitter:title", content: "DevTimeZone - Developer Time Tool" },
-  { name: "twitter:description", content: "The ultimate tool for managing global team schedules and time zone conversions" }
+  { name: "twitter:description", content: "The ultimate tool for managing global team schedules and time zone conversions" },
+  { name: "twitter:url", content: "https://global-time-dev.lovable.app/" }
 ];
 
 // Add meta tags to the document
@@ -29,6 +31,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "DevTimeZone",
+  "url": "https://global-time-dev.lovable.app/",
   "description": "A global team meeting scheduler and time zone converter for developers",
   "applicationCategory": "Productivity",
   "offers": {

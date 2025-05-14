@@ -4,7 +4,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location (add when you have one)
-Sitemap: https://devtimezone.lovable.app/sitemap.xml
+Sitemap: https://global-time-dev.lovable.app/sitemap.xml
 
 # Optimize for Google
 User-agent: Googlebot
