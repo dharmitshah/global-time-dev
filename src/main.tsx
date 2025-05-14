@@ -65,6 +65,19 @@ const jsonLd = {
   "featureList": "Time zone conversion, Log timestamp parsing, Global meeting scheduler, Simple interface"
 };
 
+// Add website schema
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Sync My Clock",
+  "url": "https://syncmyclock.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://syncmyclock.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
 // Add breadcrumb schema for better navigation understanding by search engines
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -85,10 +98,17 @@ const breadcrumbSchema = {
   ]
 };
 
+// Add WebApplication schema
 const scriptTag = document.createElement('script');
 scriptTag.type = 'application/ld+json';
 scriptTag.text = JSON.stringify(jsonLd);
 document.head.appendChild(scriptTag);
+
+// Add WebSite schema
+const websiteScriptTag = document.createElement('script');
+websiteScriptTag.type = 'application/ld+json';
+websiteScriptTag.text = JSON.stringify(websiteSchema);
+document.head.appendChild(websiteScriptTag);
 
 // Add breadcrumb schema
 const breadcrumbScriptTag = document.createElement('script');
