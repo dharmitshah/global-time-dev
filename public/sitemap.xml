@@ -7,12 +7,32 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-  <loc>https://syncmyclock.com/</loc>
+  <loc>/</loc>
   <lastmod>2025-05-14T03:58:19+00:00</lastmod>
 </url>
 
 <url>
-  <loc>https://syncmyclock.com/meeting-scheduler</loc>
+  <loc>/meeting-scheduler</loc>
+  <lastmod>2025-05-14T03:58:19+00:00</lastmod>
+</url>
+
+<url>
+  <loc>/utc-to-ist</loc>
+  <lastmod>2025-05-14T03:58:19+00:00</lastmod>
+</url>
+
+<url>
+  <loc>/utc-to-est</loc>
+  <lastmod>2025-05-14T03:58:19+00:00</lastmod>
+</url>
+
+<url>
+  <loc>/time-zone-converter-for-developers</loc>
+  <lastmod>2025-05-14T03:58:19+00:00</lastmod>
+</url>
+
+<url>
+  <loc>/world-clock-sync-tool</loc>
   <lastmod>2025-05-14T03:58:19+00:00</lastmod>
 </url>
 

@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -66,6 +65,35 @@ const Index = () => {
                 Log Parser
               </Button>
             </div>
+          </div>
+        </section>
+        
+        {/* SEO Rich Content */}
+        <section className="mb-8 bg-navy-light border border-slate-dark rounded-lg p-6 text-left animate-fade-in">
+          <h2 className="text-2xl font-bold mb-4 text-slate-light">What is Sync My Clock?</h2>
+          <p className="text-slate mb-4">
+            Sync My Clock is a free online timezone converter designed for developers, remote teams, and global professionals. 
+            Whether you're converting time between UTC, EST, IST, or JST – this tool helps you stay synced across the world. 
+            Stop Googling time zones and start converting instantly.
+          </p>
+          <p className="text-slate">
+            Our timezone conversion tools include a powerful log timestamp parser, global meeting scheduler, and intuitive time converter
+            to eliminate confusion when working across different regions. Perfect for software development teams, project managers, and digital nomads 
+            who need accurate time conversion between EST, PST, UTC, GMT, IST and all major global timezones.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link to="/utc-to-ist">
+              <Badge variant="outline" className="hover:bg-navy-dark cursor-pointer">UTC to IST Converter</Badge>
+            </Link>
+            <Link to="/utc-to-est">
+              <Badge variant="outline" className="hover:bg-navy-dark cursor-pointer">UTC to EST Converter</Badge>
+            </Link>
+            <Link to="/time-zone-converter-for-developers">
+              <Badge variant="outline" className="hover:bg-navy-dark cursor-pointer">Developer Timezone Tools</Badge>
+            </Link>
+            <Link to="/world-clock-sync-tool">
+              <Badge variant="outline" className="hover:bg-navy-dark cursor-pointer">World Clock Sync</Badge>
+            </Link>
           </div>
         </section>
         

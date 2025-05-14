@@ -7,6 +7,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import MeetingSchedulerPage from "./pages/MeetingSchedulerPage";
+import UTCtoIST from "./pages/UTCtoIST";
+import UTCtoEST from "./pages/UTCtoEST";
+import TimeZoneConverterForDevelopers from "./pages/TimeZoneConverterForDevelopers";
+import WorldClockSyncTool from "./pages/WorldClockSyncTool";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +23,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/meeting-scheduler" element={<MeetingSchedulerPage />} />
+          <Route path="/utc-to-ist" element={<UTCtoIST />} />
+          <Route path="/utc-to-est" element={<UTCtoEST />} />
+          <Route path="/time-zone-converter-for-developers" element={<TimeZoneConverterForDevelopers />} />
+          <Route path="/world-clock-sync-tool" element={<WorldClockSyncTool />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
