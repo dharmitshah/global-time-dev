@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from '@/components/ui/separator';
+import { format, addDays } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 // Default working hours (9 AM to 5 PM)
 const WORKING_HOURS = {
@@ -35,7 +38,17 @@ const MeetingScheduler = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [workingHours, setWorkingHours] = useState(WORKING_HOURS);
   const [showAllHours, setShowAllHours] = useState(false);
+  const [selectedMeetingTime, setSelectedMeetingTime] = useState<{hour: number, date: Date} | null>(null);
   const { toast } = useToast();
+  
+  // Update current time every minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentDate(new Date());
+    }, 60000);
+    
+    return () => clearInterval(timer);
+  }, []);
   
   useEffect(() => {
     // Try to load from URL params
@@ -185,17 +198,44 @@ const MeetingScheduler = () => {
   // Get the city and current time for a timezone
   const getTimeZoneInfo = (timeZone: string) => {
     const now = new Date();
-    const options: Intl.DateTimeFormatOptions = { 
-      timeZone,
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true
-    };
-    const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+    const timeString = formatInTimeZone(now, timeZone, 'h:mm a');
+    const dateString = formatInTimeZone(now, timeZone, 'EEE, MMM d');
+    
     return { 
       city: getSimplifiedName(timeZone),
-      currentTime: timeString
+      currentTime: timeString,
+      currentDate: dateString
     };
+  };
+  
+  // Get the meeting time in a specific timezone
+  const getMeetingTimeInZone = (utcHour: number, timeZone: string) => {
+    if (!selectedMeetingTime) return "";
+    
+    // Create a date for tomorrow at the selected UTC hour
+    const meetingDate = new Date();
+    meetingDate.setUTCHours(utcHour, 0, 0, 0);
+    
+    // Use formatInTimeZone to get the time in the target timezone
+    return formatInTimeZone(meetingDate, timeZone, 'h:mm a');
+  };
+  
+  // Handle selecting a meeting time
+  const handleSelectMeetingTime = (hour: number) => {
+    // Create a date for tomorrow at this hour (UTC)
+    const meetingDate = new Date();
+    meetingDate.setDate(meetingDate.getDate() + 1); // Tomorrow
+    meetingDate.setUTCHours(hour, 0, 0, 0);
+    
+    setSelectedMeetingTime({
+      hour,
+      date: meetingDate
+    });
+    
+    toast({
+      title: "Meeting time selected",
+      description: `Meeting time set for ${formatHour(hour)} UTC tomorrow`,
+    });
   };
   
   // Display a limited number of hours if not showing all
@@ -243,6 +283,7 @@ const MeetingScheduler = () => {
                       <li>View the table showing optimal meeting times</li>
                       <li>Green cells indicate working hours in each time zone</li>
                       <li>Higher scores mean more team members are available</li>
+                      <li>Click on any row to select that meeting time</li>
                       <li>Share your schedule using the Share button</li>
                     </ol>
                     
@@ -342,7 +383,7 @@ const MeetingScheduler = () => {
           {selectedTimeZones.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-4">
               {selectedTimeZones.map((zone, index) => {
-                const { city, currentTime } = getTimeZoneInfo(zone);
+                const { city, currentTime, currentDate } = getTimeZoneInfo(zone);
                 return (
                   <Badge 
                     key={zone} 
@@ -359,7 +400,8 @@ const MeetingScheduler = () => {
                           </span>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>{zone}</p>
+                          <p className="font-medium">{zone}</p>
+                          <p className="text-xs text-slate">{currentDate}</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -374,6 +416,37 @@ const MeetingScheduler = () => {
                   </Badge>
                 );
               })}
+            </div>
+          )}
+          
+          {/* Selected meeting time display */}
+          {selectedMeetingTime && selectedTimeZones.length > 0 && (
+            <div className="p-3 bg-navy-dark rounded-lg border border-cyan/20 mb-2">
+              <h4 className="text-sm font-medium mb-2 text-cyan flex items-center gap-2">
+                <CalendarClock className="h-4 w-4" />
+                Selected Meeting Time
+              </h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-cyan" />
+                  <span className="text-sm">
+                    {format(selectedMeetingTime.date, "EEEE, MMMM d")} at {formatHour(selectedMeetingTime.hour)} UTC
+                  </span>
+                </div>
+                
+                <div className="text-xs text-slate">
+                  <span className="block mb-1">Local times:</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+                    {selectedTimeZones.map(zone => (
+                      <div key={zone} className="flex items-center justify-between">
+                        <span>{getSimplifiedName(zone)}:</span>
+                        <span className="font-medium text-cyan">{getMeetingTimeInZone(selectedMeetingTime.hour, zone)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           )}
           
@@ -464,13 +537,16 @@ const MeetingScheduler = () => {
                     {displayedHours.map(({ hour, score }) => (
                       <TableRow 
                         key={hour} 
-                        className={
-                          score === selectedTimeZones.length 
-                            ? "bg-green-900/20 hover:bg-green-900/30" 
-                            : score >= selectedTimeZones.length / 2 
-                              ? "bg-yellow-900/10 hover:bg-yellow-900/20"
-                              : ""
-                        }
+                        className={`cursor-pointer ${
+                          selectedMeetingTime?.hour === hour 
+                            ? "bg-cyan/10 hover:bg-cyan/20" 
+                            : score === selectedTimeZones.length 
+                              ? "bg-green-900/20 hover:bg-green-900/30" 
+                              : score >= selectedTimeZones.length / 2 
+                                ? "bg-yellow-900/10 hover:bg-yellow-900/20"
+                                : "hover:bg-navy-dark/50"
+                        }`}
+                        onClick={() => handleSelectMeetingTime(hour)}
                       >
                         <TableCell className="font-mono">
                           <span className="font-semibold">{formatHour(hour)}</span>
