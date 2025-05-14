@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Plus, X, Users, Share2, CalendarClock, Info } from 'lucide-react';
+import { Clock, Plus, X, Users, Share2, CalendarClock, Info, Check } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import TimeZoneSelector from './TimeZoneSelector';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -247,6 +246,36 @@ const MeetingScheduler = () => {
                       <li>Share your schedule using the Share button</li>
                     </ol>
                     
+                    <div className="mt-4 p-3 bg-navy-dark rounded-md border border-slate-dark">
+                      <h4 className="text-sm font-medium mb-1 text-cyan">Understanding the colors:</h4>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-center gap-2">
+                          <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-700/30">
+                            <Check className="h-3 w-3" />
+                          </div>
+                          <span className="text-xs">Available - This person is within their working hours</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-700/30">
+                            <X className="h-3 w-3" />
+                          </div>
+                          <span className="text-xs">Unavailable - Outside of this person's working hours</span>
+                        </div>
+                      </div>
+                      
+                      <h4 className="text-sm font-medium mt-3 mb-1 text-cyan">Table background colors:</h4>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 bg-green-900/20 rounded"></div>
+                          <span className="text-xs">Perfect time - Everyone is available (100%)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 bg-yellow-900/10 rounded"></div>
+                          <span className="text-xs">Good time - More than half the team is available</span>
+                        </div>
+                      </div>
+                    </div>
+                    
                     <Separator className="my-4 bg-slate-dark" />
                     
                     <div className="flex flex-col gap-2">
@@ -366,6 +395,30 @@ const MeetingScheduler = () => {
                 )}
               </div>
               
+              {/* Legend for the table */}
+              <div className="mb-2 flex flex-wrap gap-3 text-xs text-slate p-2 bg-navy-dark/50 rounded-md">
+                <div className="flex items-center gap-1">
+                  <div className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-700/30">
+                    <Check className="h-3 w-3" />
+                  </div>
+                  <span>Available</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-700/30">
+                    <X className="h-3 w-3" />
+                  </div>
+                  <span>Unavailable</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-3 bg-green-900/20 rounded"></div>
+                  <span>Perfect time (100%)</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-3 bg-yellow-900/10 rounded"></div>
+                  <span>Good time (>50%)</span>
+                </div>
+              </div>
+              
               <div className="rounded-md border border-slate-dark overflow-hidden">
                 <Table>
                   <TableHeader>
@@ -392,7 +445,7 @@ const MeetingScheduler = () => {
                       ))}
                       <TableHead className="text-right">
                         <span className="flex items-center justify-end gap-1">
-                          Availability
+                          Available
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
@@ -431,14 +484,14 @@ const MeetingScheduler = () => {
                                 <Tooltip>
                                   <TooltipTrigger>
                                     <div className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${isWorking ? 'bg-green-700/30' : 'bg-red-700/30'}`}>
-                                      {isWorking ? '✓' : '✗'}
+                                      {isWorking ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
                                     </div>
                                   </TooltipTrigger>
                                   <TooltipContent>
-                                    <p>{isWorking ? 'Working hours' : 'Outside working hours'}</p>
+                                    <p className="font-medium">{isWorking ? 'Available' : 'Unavailable'}</p>
                                     <p className="text-xs">
-                                      {formatHour(hour)} UTC is within {getSimplifiedName(zone)}'s 
-                                      {isWorking ? ' working hours' : ' non-working hours'}
+                                      {formatHour(hour)} UTC is {isWorking ? 'within' : 'outside'} {getSimplifiedName(zone)}'s working hours
+                                      ({formatHourAMPM(workingHours.start)} - {formatHourAMPM(workingHours.end)})
                                     </p>
                                   </TooltipContent>
                                 </Tooltip>
@@ -463,9 +516,10 @@ const MeetingScheduler = () => {
                 </Table>
               </div>
               {selectedTimeZones.length > 2 && bestTimes.some(item => item.score === selectedTimeZones.length) && (
-                <div className="text-sm text-slate mt-2">
-                  <p>
-                    <span className="text-green-500">✓</span> Perfect match! All team members are available at times with {selectedTimeZones.length}/{selectedTimeZones.length} score.
+                <div className="text-sm bg-green-900/10 border border-green-900/20 rounded-md p-3 mt-2">
+                  <p className="flex items-center gap-1">
+                    <Check className="h-4 w-4 text-green-500" />
+                    <span className="font-medium">Perfect match!</span> We found times when all team members are available.
                   </p>
                 </div>
               )}
