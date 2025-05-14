@@ -1,4 +1,6 @@
 
+# DevTimeZone - Comprehensive robots.txt for SEO optimization
+
 # Allow all crawlers
 User-agent: *
 Allow: /
@@ -8,6 +10,16 @@ Sitemap: https://global-time-dev.lovable.app/sitemap.xml
 
 # Optimize for Google
 User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Optimize for Google Images
+User-agent: Googlebot-Image
+Allow: /
+Crawl-delay: 1
+
+# Optimize for Google Mobile
+User-agent: Googlebot-Mobile
 Allow: /
 Crawl-delay: 1
 
@@ -29,9 +41,6 @@ Allow: /
 User-agent: Pinterest
 Allow: /
 
-# Block access to specific folders if needed
-# Disallow: /private/
-
 # Additional crawlers
 User-agent: Slurp
 Allow: /
@@ -44,3 +53,10 @@ Allow: /
 
 User-agent: Baiduspider
 Allow: /
+
+# Specify any assets that shouldn't be indexed
+# Disallow: /assets/private/
+
+# No delay for specific pages with important content
+User-agent: *
+Crawl-delay: 5
