@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,7 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from '@/components/ui/separator';
 import { format, addDays } from 'date-fns';
-import { formatInTimeZone } from 'date-fns-tz';
+import { formatInTimeZone } from 'date-fns-tz'; // This import is fine as is
 
 // Default working hours (9 AM to 5 PM)
 const WORKING_HOURS = {
@@ -198,6 +197,7 @@ const MeetingScheduler = () => {
   // Get the city and current time for a timezone
   const getTimeZoneInfo = (timeZone: string) => {
     const now = new Date();
+    // No need to change this as formatInTimeZone still works the same way
     const timeString = formatInTimeZone(now, timeZone, 'h:mm a');
     const dateString = formatInTimeZone(now, timeZone, 'EEE, MMM d');
     
@@ -242,6 +242,7 @@ const MeetingScheduler = () => {
   const displayedHours = showAllHours ? bestTimes : bestTimes.slice(0, 8);
   
   return (
+    
     <Card className="border border-slate-dark bg-navy-light">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between flex-col sm:flex-row gap-2">
