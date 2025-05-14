@@ -1,12 +1,170 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Clock, Globe, CalendarClock } from 'lucide-react';
+import CurrentTime from '@/components/CurrentTime';
+import TimeConverter from '@/components/TimeConverter';
+import LogParser from '@/components/LogParser';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <header className="py-6 px-4 sm:px-6 md:px-8">
+        <div className="container max-w-6xl">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Clock className="h-6 w-6 text-cyan" />
+              <h1 className="text-xl font-bold tracking-tight">DevTimeZone</h1>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline text-sm text-slate">Time management for developers</span>
+              <Badge variant="outline" className="border-cyan text-cyan">Beta</Badge>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <main className="flex-1 container max-w-6xl px-4 sm:px-6 md:px-8 mb-8">
+        {/* Hero section */}
+        <section className="py-8 md:py-16">
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-light mb-4">
+              Time conversion for <span className="text-cyan terminal-prompt">developers</span>
+            </h2>
+            <p className="text-lg text-slate mb-8 max-w-2xl mx-auto">
+              Convert timestamps across global time zones, parse log timestamps, and collaborate seamlessly with distributed teams.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button 
+                size="lg"
+                className="bg-cyan hover:bg-cyan-dark text-navy font-medium"
+                onClick={() => document.getElementById('converter')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <Clock className="mr-2 h-4 w-4" />
+                Start Converting
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-slate-dark hover:bg-navy-dark hover:text-cyan hover:border-cyan"
+                onClick={() => document.getElementById('parser')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <CalendarClock className="mr-2 h-4 w-4" />
+                Parse Log Timestamps
+              </Button>
+            </div>
+          </div>
+        </section>
+        
+        {/* Current time card */}
+        <section className="mb-12">
+          <CurrentTime className="max-w-md mx-auto" />
+        </section>
+        
+        {/* Features section */}
+        <section id="features" className="py-8 md:py-12">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
+            <span className="text-cyan">&lt;</span> Features <span className="text-cyan">/&gt;</span>
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6 mt-8">
+            <Card className="border border-slate-dark bg-navy-light">
+              <CardContent className="p-6">
+                <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
+                  <Clock className="h-5 w-5 text-cyan" />
+                </div>
+                <h3 className="text-lg font-medium mb-2">Time Zone Conversion</h3>
+                <p className="text-sm text-slate">
+                  Instantly convert times between multiple global time zones for easier coordination with distributed teams.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border border-slate-dark bg-navy-light">
+              <CardContent className="p-6">
+                <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
+                  <CalendarClock className="h-5 w-5 text-cyan" />
+                </div>
+                <h3 className="text-lg font-medium mb-2">Log Timestamp Parser</h3>
+                <p className="text-sm text-slate">
+                  Extract and convert timestamps from log files in various formats, including ISO 8601 and Unix timestamps.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border border-slate-dark bg-navy-light">
+              <CardContent className="p-6">
+                <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
+                  <Globe className="h-5 w-5 text-cyan" />
+                </div>
+                <h3 className="text-lg font-medium mb-2">Shareable Time Links</h3>
+                <p className="text-sm text-slate">
+                  Share time zone configurations with team members via URL to ensure everyone is on the same page.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+        
+        <Separator className="my-10 bg-slate-dark" />
+        
+        {/* Time zone converter section */}
+        <section id="converter" className="py-8 md:py-12">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 flex items-center gap-2 justify-center">
+            <Clock className="h-6 w-6 text-cyan" />
+            <span>Time Zone Converter</span>
+          </h2>
+          <TimeConverter />
+        </section>
+        
+        {/* Log parser section */}
+        <section id="parser" className="py-8 md:py-12">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 flex items-center gap-2 justify-center">
+            <CalendarClock className="h-6 w-6 text-cyan" />
+            <span>Log Timestamp Parser</span>
+          </h2>
+          <LogParser />
+        </section>
+        
+        {/* FAQ code snippets */}
+        <section className="py-8 md:py-12">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
+            <span className="text-cyan">#</span> Developer Tips <span className="text-cyan">#</span>
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
+            <div className="code-block">
+              <div className="text-sm text-slate-light mb-2 terminal-prompt">Convert ISO to Unix timestamp</div>
+              <pre className="text-xs text-slate overflow-x-auto"><code>
+{`# JavaScript
+const isoDate = "2023-05-14T15:30:45.123Z";
+const unixTimestamp = Math.floor(new Date(isoDate).getTime() / 1000);
+console.log(unixTimestamp); // 1684079445`}
+              </code></pre>
+            </div>
+            
+            <div className="code-block">
+              <div className="text-sm text-slate-light mb-2 terminal-prompt">Format date in specific timezone</div>
+              <pre className="text-xs text-slate overflow-x-auto"><code>
+{`# JavaScript
+const date = new Date();
+const options = { 
+  timeZone: 'Asia/Tokyo',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+};
+console.log(date.toLocaleString('en-US', options));`}
+              </code></pre>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <Footer />
     </div>
   );
 };

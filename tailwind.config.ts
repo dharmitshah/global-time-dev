@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,12 +19,30 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				mono: ['Fira Code', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				navy: {
+					light: '#172a45',
+					DEFAULT: '#0a192f',
+					dark: '#020c1b',
+				},
+				slate: {
+					light: '#ccd6f6',
+					DEFAULT: '#8892b0',
+					dark: '#495670',
+				},
+				cyan: {
+					light: '#a8ffea',
+					DEFAULT: '#64ffda',
+					dark: '#29bc9b',
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -84,11 +103,21 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				blink: {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0' },
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				blink: 'blink 1s step-start infinite',
+				'fade-in': 'fade-in 0.5s ease-out'
 			}
 		}
 	},
