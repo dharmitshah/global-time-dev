@@ -3,16 +3,18 @@
 User-agent: *
 Allow: /
 
-# Sitemap location (add when you have one)
+# Sitemap location
 Sitemap: https://global-time-dev.lovable.app/sitemap.xml
 
 # Optimize for Google
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 # Optimize for Bing
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 # Social media crawlers
 User-agent: Twitterbot
@@ -24,5 +26,21 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
+User-agent: Pinterest
+Allow: /
+
 # Block access to specific folders if needed
 # Disallow: /private/
+
+# Additional crawlers
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /

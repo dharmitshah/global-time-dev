@@ -6,7 +6,7 @@ import './index.css'
 // Add meta tags for SEO
 const metaTags = [
   { name: "description", content: "DevTimeZone - The ultimate tool for managing global team schedules and time zone conversions" },
-  { name: "keywords", content: "time zone converter, meeting scheduler, global team, developer tools, time management" },
+  { name: "keywords", content: "time zone converter, meeting scheduler, global team, developer tools, time management, log timestamp parser, UTC conversion, ISO 8601, Unix timestamp, programmer tools" },
   { property: "og:title", content: "DevTimeZone - Developer Time Conversion Tool" },
   { property: "og:description", content: "Find the perfect meeting times for your distributed team and convert time zones instantly" },
   { property: "og:type", content: "website" },
@@ -14,7 +14,9 @@ const metaTags = [
   { name: "twitter:card", content: "summary_large_image" },
   { name: "twitter:title", content: "DevTimeZone - Developer Time Tool" },
   { name: "twitter:description", content: "The ultimate tool for managing global team schedules and time zone conversions" },
-  { name: "twitter:url", content: "https://global-time-dev.lovable.app/" }
+  { name: "twitter:url", content: "https://global-time-dev.lovable.app/" },
+  { name: "author", content: "DevTimeZone Team" },
+  { name: "robots", content: "index, follow" }
 ];
 
 // Add meta tags to the document
@@ -39,7 +41,13 @@ const jsonLd = {
     "price": "0",
     "priceCurrency": "USD"
   },
-  "operatingSystem": "Any"
+  "operatingSystem": "Any",
+  "author": {
+    "@type": "Organization",
+    "name": "DevTimeZone"
+  },
+  "screenshot": "https://global-time-dev.lovable.app/og-image.png",
+  "softwareVersion": "1.0.0"
 };
 
 const scriptTag = document.createElement('script');
