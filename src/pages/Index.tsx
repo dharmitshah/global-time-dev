@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Clock, Globe, CalendarClock } from 'lucide-react';
+import { Clock, Globe, CalendarClock, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import CurrentTime from '@/components/CurrentTime';
 import TimeConverter from '@/components/TimeConverter';
 import LogParser from '@/components/LogParser';
@@ -50,10 +51,11 @@ const Index = () => {
                 variant="outline" 
                 size="lg"
                 className="border-slate-dark hover:bg-navy-dark hover:text-cyan hover:border-cyan"
-                onClick={() => document.getElementById('parser')?.scrollIntoView({ behavior: 'smooth' })}
+                as={Link}
+                to="/meeting-scheduler"
               >
-                <CalendarClock className="mr-2 h-4 w-4" />
-                Parse Log Timestamps
+                <Users className="mr-2 h-4 w-4" />
+                Schedule Team Meetings
               </Button>
             </div>
           </div>
@@ -98,11 +100,11 @@ const Index = () => {
             <Card className="border border-slate-dark bg-navy-light">
               <CardContent className="p-6">
                 <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
-                  <Globe className="h-5 w-5 text-cyan" />
+                  <Users className="h-5 w-5 text-cyan" />
                 </div>
-                <h3 className="text-lg font-medium mb-2">Shareable Time Links</h3>
+                <h3 className="text-lg font-medium mb-2">Meeting Scheduler</h3>
                 <p className="text-sm text-slate">
-                  Share time zone configurations with team members via URL to ensure everyone is on the same page.
+                  Find the perfect meeting time for your global team by visualizing overlapping working hours across time zones.
                 </p>
               </CardContent>
             </Card>
@@ -127,6 +129,28 @@ const Index = () => {
             <span>Log Timestamp Parser</span>
           </h2>
           <LogParser />
+        </section>
+        
+        {/* Meeting scheduler call to action */}
+        <section className="py-8 md:py-12">
+          <div className="bg-navy-dark border border-slate-dark rounded-lg p-8 text-center">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 justify-center">
+              <Users className="h-6 w-6 text-cyan" />
+              <span>Global Team Management</span>
+            </h2>
+            <p className="text-slate mb-6 max-w-2xl mx-auto">
+              Managing a distributed team? Find the best meeting times that work for everyone with our Meeting Scheduler tool.
+            </p>
+            <Button
+              size="lg"
+              as={Link}
+              to="/meeting-scheduler"
+              className="bg-cyan hover:bg-cyan-dark text-navy font-medium"
+            >
+              <Users className="mr-2 h-4 w-4" />
+              Schedule Team Meetings
+            </Button>
+          </div>
         </section>
         
         {/* FAQ code snippets */}
