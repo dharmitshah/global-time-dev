@@ -5,22 +5,22 @@ import './index.css'
 
 // Enhanced meta tags for SEO
 const metaTags = [
-  { name: "description", content: "DevTimeZone - The ultimate tool for managing global team schedules and time zone conversions. Convert timestamps instantly for developers." },
-  { name: "keywords", content: "time zone converter, meeting scheduler, global team, developer tools, time management, log timestamp parser, UTC conversion, ISO 8601, Unix timestamp, programmer tools, software developer timezone, remote team coordination, international team scheduler, global development teams, programming timestamp, log analysis tools" },
-  { property: "og:title", content: "DevTimeZone - Ultimate Developer Time Conversion Tool" },
-  { property: "og:description", content: "Find the perfect meeting times for your distributed team and convert time zones instantly. The #1 tool for global developer teams." },
+  { name: "description", content: "Instantly convert time between global timezones. Built for remote teams, developers, and digital nomads. Simple, fast & free." },
+  { name: "keywords", content: "timezone converter, time conversion, UTC to IST, remote work tools, global time, sync time, time calculator" },
+  { property: "og:title", content: "Sync My Clock - Free Online Timezone Converter" },
+  { property: "og:description", content: "Instantly convert time between global timezones. Built for remote teams, developers, and digital nomads. Simple, fast & free." },
   { property: "og:type", content: "website" },
-  { property: "og:url", content: "https://global-time-dev.lovable.app/" },
-  { property: "og:image", content: "https://global-time-dev.lovable.app/og-image.png" },
+  { property: "og:url", content: "https://syncmyclock.com/" },
+  { property: "og:image", content: "https://syncmyclock.com/og-image.png" },
   { property: "og:image:width", content: "1200" },
   { property: "og:image:height", content: "630" },
-  { property: "og:image:alt", content: "DevTimeZone application interface showing time zone conversions" },
+  { property: "og:image:alt", content: "Sync My Clock application interface showing time zone conversions" },
   { name: "twitter:card", content: "summary_large_image" },
-  { name: "twitter:title", content: "DevTimeZone - Ultimate Developer Time Tool" },
-  { name: "twitter:description", content: "The ultimate tool for managing global team schedules and time zone conversions. Perfect for distributed development teams." },
-  { name: "twitter:url", content: "https://global-time-dev.lovable.app/" },
-  { name: "twitter:image", content: "https://global-time-dev.lovable.app/og-image.png" },
-  { name: "author", content: "DevTimeZone Team" },
+  { name: "twitter:title", content: "Sync My Clock - Free Online Timezone Converter" },
+  { name: "twitter:description", content: "Instantly convert time between global timezones. Built for remote teams, developers, and digital nomads." },
+  { name: "twitter:url", content: "https://syncmyclock.com/" },
+  { name: "twitter:image", content: "https://syncmyclock.com/og-image.png" },
+  { name: "author", content: "Sync My Clock" },
   { name: "robots", content: "index, follow, max-image-preview:large" }
 ];
 
@@ -37,10 +37,10 @@ metaTags.forEach(tag => {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "DevTimeZone",
-  "url": "https://global-time-dev.lovable.app/",
-  "description": "A comprehensive global team meeting scheduler and time zone converter built specifically for software developers and engineering teams.",
-  "applicationCategory": "DeveloperTool",
+  "name": "Sync My Clock",
+  "url": "https://syncmyclock.com/",
+  "description": "Instantly convert time between global timezones. Built for remote teams, developers, and digital nomads.",
+  "applicationCategory": "TimezoneConverter",
   "operatingSystem": "Any",
   "offers": {
     "@type": "Offer",
@@ -50,10 +50,10 @@ const jsonLd = {
   },
   "author": {
     "@type": "Organization",
-    "name": "DevTimeZone",
-    "url": "https://global-time-dev.lovable.app/"
+    "name": "Sync My Clock",
+    "url": "https://syncmyclock.com/"
   },
-  "screenshot": "https://global-time-dev.lovable.app/og-image.png",
+  "screenshot": "https://syncmyclock.com/og-image.png",
   "softwareVersion": "1.0.0",
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -62,7 +62,7 @@ const jsonLd = {
     "bestRating": "5",
     "worstRating": "1"
   },
-  "featureList": "Time zone conversion, Log timestamp parsing, Global meeting scheduler, Developer-focused interface"
+  "featureList": "Time zone conversion, Log timestamp parsing, Global meeting scheduler, Simple interface"
 };
 
 // Add breadcrumb schema for better navigation understanding by search engines
@@ -74,13 +74,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://global-time-dev.lovable.app/"
+      "item": "https://syncmyclock.com/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Meeting Scheduler",
-      "item": "https://global-time-dev.lovable.app/meeting-scheduler"
+      "item": "https://syncmyclock.com/meeting-scheduler"
     }
   ]
 };
@@ -97,6 +97,6 @@ breadcrumbScriptTag.text = JSON.stringify(breadcrumbSchema);
 document.head.appendChild(breadcrumbScriptTag);
 
 // Update document title with keyword-rich title
-document.title = "DevTimeZone - Ultimate Developer Time Zone Converter & Meeting Scheduler";
+document.title = "Sync My Clock - Free Online Timezone Converter";
 
 createRoot(document.getElementById("root")!).render(<App />);

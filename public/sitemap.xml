@@ -5,16 +5,14 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
 
 <url>
-  <loc>/</loc>
+  <loc>https://syncmyclock.com/</loc>
   <lastmod>2025-05-14T03:58:19+00:00</lastmod>
 </url>
 
 <url>
-  <loc>/meeting-scheduler</loc>
+  <loc>https://syncmyclock.com/meeting-scheduler</loc>
   <lastmod>2025-05-14T03:58:19+00:00</lastmod>
 </url>
 

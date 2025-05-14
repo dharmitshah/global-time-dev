@@ -1,12 +1,12 @@
 
-# DevTimeZone - Comprehensive robots.txt for SEO optimization
+# Sync My Clock - Comprehensive robots.txt for SEO optimization
 
 # Allow all crawlers
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: /sitemap.xml
+Sitemap: https://syncmyclock.com/sitemap.xml
 
 # Optimize for Google
 User-agent: Googlebot
