@@ -1,8 +1,16 @@
+
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  #root {
+    max-width: 1280px;
+    padding: 2rem;
+  }
 }
 
 .logo {
@@ -16,6 +24,35 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Make touch targets larger on mobile */
+@media (max-width: 767px) {
+  button, 
+  a.btn, 
+  [role="button"], 
+  input[type="submit"], 
+  input[type="reset"], 
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve tap target size */
+  .clickable {
+    padding: 0.5rem;
+  }
+}
+
+/* Add smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix iOS font sizing issues */
+body {
+  -webkit-text-size-adjust: 100%;
 }
 
 @keyframes logo-spin {
@@ -39,4 +76,28 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Add viewport height solutions to prevent issues with mobile browser chrome */
+.min-h-screen {
+  min-height: 100vh; /* Fallback */
+  min-height: -webkit-fill-available;
+  min-height: 100dvh; /* Modern browsers */
+}
+
+/* Make sure images don't overflow their containers */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better touch focus states */
+@media (hover: none) {
+  a:hover {
+    background-color: transparent !important;
+  }
+  
+  *:focus {
+    outline: auto !important;
+  }
 }

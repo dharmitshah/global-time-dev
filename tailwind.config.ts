@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -13,8 +12,16 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
+			padding: {
+				DEFAULT: '1rem',
+				sm: '1.5rem',
+				md: '2rem',
+			},
 			screens: {
+				sm: '100%',
+				md: '100%',
+				lg: '1024px',
+				xl: '1280px',
 				'2xl': '1400px'
 			}
 		},
@@ -111,14 +118,35 @@ export default {
 				'fade-in': {
 					'0%': { opacity: '0' },
 					'100%': { opacity: '1' },
-				}
+				},
+				'slide-in-bottom': {
+					'0%': { transform: 'translateY(100%)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' },
+				},
+				'slide-out-bottom': {
+					'0%': { transform: 'translateY(0)', opacity: '1' },
+					'100%': { transform: 'translateY(100%)', opacity: '0' },
+				},
+				'zoom-in-mobile': {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				blink: 'blink 1s step-start infinite',
-				'fade-in': 'fade-in 0.5s ease-out'
-			}
+				'fade-in': 'fade-in 0.5s ease-out',
+				'slide-in-bottom': 'slide-in-bottom 0.3s ease-out',
+				'slide-out-bottom': 'slide-out-bottom 0.3s ease-in',
+				'zoom-in-mobile': 'zoom-in-mobile 0.2s ease-out',
+			},
+			spacing: {
+				'safe-top': 'env(safe-area-inset-top)',
+				'safe-bottom': 'env(safe-area-inset-bottom)',
+				'safe-left': 'env(safe-area-inset-left)',
+				'safe-right': 'env(safe-area-inset-right)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
