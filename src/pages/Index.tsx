@@ -76,10 +76,15 @@ const Index = () => {
             Whether you're converting time between UTC, EST, IST, or JST – this tool helps you stay synced across the world. 
             Stop Googling time zones and start converting instantly.
           </p>
-          <p className="text-slate">
+          <p className="text-slate mb-4">
             Our timezone conversion tools include a powerful log timestamp parser, global meeting scheduler, and intuitive time converter
             to eliminate confusion when working across different regions. Perfect for software development teams, project managers, and digital nomads 
             who need accurate time conversion between EST, PST, UTC, GMT, IST and all major global timezones.
+          </p>
+          <p className="text-slate mb-4">
+            Time zone conversion has never been easier. Whether you're scheduling international meetings, coordinating software releases,
+            or just trying to connect with colleagues abroad, our tool handles the complex calculations instantly. Convert any time from 
+            UTC to local time, plan meetings that work for everyone, and never miss a deadline due to time confusion again.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link to="/utc-to-ist">
@@ -219,6 +224,55 @@ const options = {
 console.log(date.toLocaleString('en-US', options));`}
               </code></pre>
             </div>
+          </div>
+        </section>
+        
+        {/* SEO FAQ Section */}
+        <section className="py-8 md:py-12">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
+            Frequently Asked Questions
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
+            <Card className="border border-slate-dark bg-navy-light">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-medium mb-2 text-cyan">How do I convert UTC to local time?</h3>
+                <p className="text-slate">
+                  To convert UTC to your local time, simply select your timezone from our converter tool above. 
+                  Enter the UTC time you want to convert, and our tool will instantly display the equivalent time in your local timezone.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border border-slate-dark bg-navy-light">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-medium mb-2 text-cyan">What is the difference between GMT and UTC?</h3>
+                <p className="text-slate">
+                  GMT (Greenwich Mean Time) is a time zone, while UTC (Coordinated Universal Time) is a time standard. 
+                  For most practical purposes they are the same, but UTC is maintained by atomic clocks and is used as the global reference point.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border border-slate-dark bg-navy-light">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-medium mb-2 text-cyan">How do I schedule meetings with teams in different time zones?</h3>
+                <p className="text-slate">
+                  Use our Meeting Scheduler tool to input the time zones of all team members. The tool will automatically 
+                  find suitable meeting times that work for everyone, taking into account working hours and time differences.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border border-slate-dark bg-navy-light">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-medium mb-2 text-cyan">How do I convert timestamps in log files?</h3>
+                <p className="text-slate">
+                  Our Log Parser tool can automatically detect and convert timestamps in various formats. Simply paste your log data, 
+                  select the source format and target timezone, and the tool will convert all timestamps for you.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </section>
       </main>
