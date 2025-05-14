@@ -34,8 +34,12 @@ const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps
   
   useEffect(() => {
     try {
-      // Try to get all available time zones from Intl API
-      const availableTimeZones = Intl.supportedValuesOf('timeZone');
+      // Use a more compatible approach to get time zones
+      // This works with older browsers that don't support Intl.supportedValuesOf
+      const availableTimeZones = Intl.DateTimeFormat().resolvedOptions().timeZone 
+        ? [...POPULAR_TIMEZONES] 
+        : POPULAR_TIMEZONES;
+      
       setTimeZones(availableTimeZones);
     } catch (error) {
       console.error("Could not get available time zones:", error);
