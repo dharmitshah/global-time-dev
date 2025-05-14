@@ -462,7 +462,7 @@ const MeetingScheduler = () => {
                   </TableBody>
                 </Table>
               </div>
-              {selectedTimeZones.length > 2 && score => selectedTimeZones.length && (
+              {selectedTimeZones.length > 2 && bestTimes.some(item => item.score === selectedTimeZones.length) && (
                 <div className="text-sm text-slate mt-2">
                   <p>
                     <span className="text-green-500">✓</span> Perfect match! All team members are available at times with {selectedTimeZones.length}/{selectedTimeZones.length} score.
