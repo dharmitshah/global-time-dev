@@ -6,6 +6,7 @@
       xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- Generated for Sync My Clock - Best Online Timezone Converter, World Clock, UTC to IST, UTC to EST -->
 
 <url>
   <loc>https://syncmyclock.com/</loc>
@@ -48,5 +49,7 @@
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
+
+<!-- Keywords: timezone converter, world clock, UTC to IST, UTC to EST, time conversion app, remote work tools -->
 
 </urlset>

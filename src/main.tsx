@@ -1,4 +1,3 @@
-
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -6,7 +5,7 @@ import './index.css'
 // Enhanced meta tags for SEO
 const metaTags = [
   { name: "description", content: "Instantly convert time between global timezones. Built for remote teams, developers, and digital nomads. Simple, fast & free." },
-  { name: "keywords", content: "timezone converter, time conversion, UTC to IST, UTC to EST, remote work tools, global time, sync time, time calculator, developer time tools" },
+  { name: "keywords", content: "timezone converter, time conversion, UTC to IST, UTC to EST, remote work tools, global time, sync time, time calculator, developer time tools, world clock, international time, time zone difference, military time, epoch converter, unix timestamp, GMT converter, PST to EST, JST time, AEST converter, timezone API, daylight savings calculator, time zone abbreviations, meeting planner, time zone chart, timezone database, business hours calculator, team timezone management, remote collaboration, local time worldwide, current global time, international date line, time format conversion, universal coordinated time, greenwich mean time, digital nomad resources, cross-timezone planning, international business, travel time calculator, developer timestamp tools, log time parser" },
   { property: "og:title", content: "Sync My Clock - Free Online Timezone Converter" },
   { property: "og:description", content: "Instantly convert time between global timezones. Built for remote teams, developers, and digital nomads. Simple, fast & free." },
   { property: "og:type", content: "website" },
@@ -62,8 +61,8 @@ const jsonLd = {
     "bestRating": "5",
     "worstRating": "1"
   },
-  "featureList": "Time zone conversion, Log timestamp parsing, Global meeting scheduler, Simple interface",
-  "keywords": "timezone converter, time conversion, UTC to IST, UTC to EST, remote work tools, global time, time calculator"
+  "featureList": "Time zone conversion, Log timestamp parsing, Global meeting scheduler, Simple interface, UTC to IST conversion, UTC to EST conversion, Unix timestamp conversion, Military time format, World clock display, Team timezone management",
+  "keywords": "timezone converter, time conversion, UTC to IST, UTC to EST, remote work tools, global time, time calculator, timestamp parser, meeting scheduler, world clock, timezone difference calculator, international time, epoch converter, unix timestamp, GMT converter, PST to EST, JST time, AEST converter"
 };
 
 // Add website schema with more detailed search capability
@@ -177,6 +176,6 @@ faqScriptTag.text = JSON.stringify(faqSchema);
 document.head.appendChild(faqScriptTag);
 
 // Update document title with keyword-rich title
-document.title = "Sync My Clock - Free Online Timezone Converter | UTC to IST | UTC to EST";
+document.title = "Sync My Clock - Free Online Timezone Converter | UTC to IST | UTC to EST | World Clock | Global Time Tool";
 
 createRoot(document.getElementById("root")!).render(<App />);
