@@ -51,11 +51,19 @@ const Index = () => {
                 variant="outline" 
                 size="lg"
                 className="border-slate-dark hover:bg-navy-dark hover:text-cyan hover:border-cyan"
-                as={Link}
-                to="/meeting-scheduler"
+                onClick={() => window.location.href = '/meeting-scheduler'}
               >
                 <Users className="mr-2 h-4 w-4" />
                 Schedule Team Meetings
+              </Button>
+              <Button 
+                variant="secondary"
+                size="lg" 
+                className="border-slate-dark bg-navy-dark hover:bg-navy hover:text-cyan"
+                onClick={() => document.getElementById('parser')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <CalendarClock className="mr-2 h-4 w-4" />
+                Log Parser
               </Button>
             </div>
           </div>
@@ -143,9 +151,8 @@ const Index = () => {
             </p>
             <Button
               size="lg"
-              as={Link}
-              to="/meeting-scheduler"
               className="bg-cyan hover:bg-cyan-dark text-navy font-medium"
+              onClick={() => window.location.href = '/meeting-scheduler'}
             >
               <Users className="mr-2 h-4 w-4" />
               Schedule Team Meetings
