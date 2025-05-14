@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -20,7 +21,7 @@ const Index = () => {
               <h1 className="text-xl font-bold tracking-tight">DevTimeZone</h1>
             </div>
             <div className="flex items-center gap-2">
-              <span className="hidden sm:inline text-sm text-slate">Time management for developers</span>
+              <span className="hidden sm:inline text-sm text-slate">Time zone converter for global teams</span>
               <Badge variant="outline" className="border-cyan text-cyan">Beta</Badge>
             </div>
           </div>
@@ -32,10 +33,10 @@ const Index = () => {
         <section className="py-8 md:py-16">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-light mb-4">
-              Time conversion for <span className="text-cyan terminal-prompt">developers worldwide</span>
+              Ultimate Time Zone <span className="text-cyan terminal-prompt">Converter & World Clock</span>
             </h2>
             <p className="text-lg text-slate mb-8 max-w-2xl mx-auto">
-              Convert timestamps across global time zones, parse log timestamps, and collaborate seamlessly with distributed teams.
+              Convert timestamps across global time zones, calculate time differences, and collaborate seamlessly with distributed teams. Free UTC to EST, UTC to IST converter.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button 
@@ -44,7 +45,7 @@ const Index = () => {
                 onClick={() => document.getElementById('converter')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 <Clock className="mr-2 h-4 w-4" />
-                Start Converting
+                Convert Time Zones
               </Button>
               <Button 
                 variant="outline" 
@@ -62,7 +63,7 @@ const Index = () => {
                 onClick={() => document.getElementById('parser')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 <CalendarClock className="mr-2 h-4 w-4" />
-                Log Parser
+                Parse Log Timestamps
               </Button>
             </div>
           </div>
@@ -70,19 +71,19 @@ const Index = () => {
         
         {/* SEO Rich Content */}
         <section className="mb-8 bg-navy-light border border-slate-dark rounded-lg p-6 text-left animate-fade-in">
-          <h2 className="text-2xl font-bold mb-4 text-slate-light">What is Sync My Clock?</h2>
+          <h2 className="text-2xl font-bold mb-4 text-slate-light">Free Online Time Zone Converter & World Clock</h2>
           <p className="text-slate mb-4">
-            Sync My Clock is a free online timezone converter designed for developers, remote teams, and global professionals. 
-            Whether you're converting time between UTC, EST, IST, or JST – this tool helps you stay synced across the world. 
-            Stop Googling time zones and start converting instantly.
+            Sync My Clock is the best free online timezone converter designed for developers, remote teams, digital nomads, and global professionals. 
+            Whether you're converting time between UTC, EST, IST, PST, GMT, or JST – our global time zone calculator helps you stay synced across the world. 
+            Stop Googling "time difference between UTC and EST" and start converting instantly.
           </p>
           <p className="text-slate mb-4">
-            Our timezone conversion tools include a powerful log timestamp parser, global meeting scheduler, and intuitive time converter
+            Our timezone conversion tools include a powerful log timestamp parser, international meeting scheduler, and intuitive world clock app
             to eliminate confusion when working across different regions. Perfect for software development teams, project managers, and digital nomads 
             who need accurate time conversion between EST, PST, UTC, GMT, IST and all major global timezones.
           </p>
           <p className="text-slate mb-4">
-            Time zone conversion has never been easier. Whether you're scheduling international meetings, coordinating software releases,
+            Time zone conversion and calculating time differences has never been easier. Whether you're scheduling international meetings, coordinating software releases,
             or just trying to connect with colleagues abroad, our tool handles the complex calculations instantly. Convert any time from 
             UTC to local time, plan meetings that work for everyone, and never miss a deadline due to time confusion again.
           </p>
@@ -110,7 +111,7 @@ const Index = () => {
         {/* Features section */}
         <section id="features" className="py-8 md:py-12">
           <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
-            <span className="text-cyan">&lt;</span> Features <span className="text-cyan">/&gt;</span>
+            <span className="text-cyan">&lt;</span> Time Zone Tools <span className="text-cyan">/&gt;</span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-6 mt-8">
@@ -119,9 +120,9 @@ const Index = () => {
                 <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
                   <Clock className="h-5 w-5 text-cyan" />
                 </div>
-                <h3 className="text-lg font-medium mb-2">Time Zone Conversion</h3>
+                <h3 className="text-lg font-medium mb-2">World Clock & Time Zone Converter</h3>
                 <p className="text-sm text-slate">
-                  Instantly convert times between multiple global time zones for easier coordination with distributed teams.
+                  Instantly convert times between multiple global time zones. UTC to EST, UTC to IST, and all major time zones supported.
                 </p>
               </CardContent>
             </Card>
@@ -133,7 +134,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-lg font-medium mb-2">Log Timestamp Parser</h3>
                 <p className="text-sm text-slate">
-                  Extract and convert timestamps from log files in various formats, including ISO 8601 and Unix timestamps.
+                  Extract and convert timestamps from log files in various formats, including ISO 8601, Unix timestamps, and more.
                 </p>
               </CardContent>
             </Card>
@@ -143,7 +144,7 @@ const Index = () => {
                 <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
                   <Users className="h-5 w-5 text-cyan" />
                 </div>
-                <h3 className="text-lg font-medium mb-2">Meeting Scheduler</h3>
+                <h3 className="text-lg font-medium mb-2">Global Meeting Planner</h3>
                 <p className="text-sm text-slate">
                   Find the perfect meeting time for your global team by visualizing overlapping working hours across time zones.
                 </p>
@@ -158,7 +159,7 @@ const Index = () => {
         <section id="converter" className="py-8 md:py-12">
           <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 flex items-center gap-2 justify-center">
             <Clock className="h-6 w-6 text-cyan" />
-            <span>Time Zone Converter</span>
+            <span>Time Zone Converter & Calculator</span>
           </h2>
           <TimeConverter />
         </section>
@@ -177,7 +178,7 @@ const Index = () => {
           <div className="bg-navy-dark border border-slate-dark rounded-lg p-8 text-center">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 justify-center">
               <Users className="h-6 w-6 text-cyan" />
-              <span>Global Team Management</span>
+              <span>International Meeting Scheduler</span>
             </h2>
             <p className="text-slate mb-6 max-w-2xl mx-auto">
               Managing a distributed team? Find the best meeting times that work for everyone with our Meeting Scheduler tool.
@@ -188,7 +189,7 @@ const Index = () => {
               onClick={() => window.location.href = '/meeting-scheduler'}
             >
               <Users className="mr-2 h-4 w-4" />
-              Schedule Team Meetings
+              Schedule Global Team Meetings
             </Button>
           </div>
         </section>
@@ -196,7 +197,7 @@ const Index = () => {
         {/* FAQ code snippets */}
         <section className="py-8 md:py-12">
           <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
-            <span className="text-cyan">#</span> Developer Tips <span className="text-cyan">#</span>
+            <span className="text-cyan">#</span> Developer Time Zone Tools <span className="text-cyan">#</span>
           </h2>
           
           <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -230,7 +231,7 @@ console.log(date.toLocaleString('en-US', options));`}
         {/* SEO FAQ Section */}
         <section className="py-8 md:py-12">
           <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
-            Frequently Asked Questions
+            Time Zone Converter FAQ
           </h2>
           
           <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -266,10 +267,10 @@ console.log(date.toLocaleString('en-US', options));`}
             
             <Card className="border border-slate-dark bg-navy-light">
               <CardContent className="p-6">
-                <h3 className="text-lg font-medium mb-2 text-cyan">How do I convert timestamps in log files?</h3>
+                <h3 className="text-lg font-medium mb-2 text-cyan">How do I calculate time differences between time zones?</h3>
                 <p className="text-slate">
-                  Our Log Parser tool can automatically detect and convert timestamps in various formats. Simply paste your log data, 
-                  select the source format and target timezone, and the tool will convert all timestamps for you.
+                  Our Time Zone Calculator makes it easy to find the time difference between any two locations. Simply select the 
+                  two time zones you want to compare, and our tool will show you the current time in both zones and the exact hour difference.
                 </p>
               </CardContent>
             </Card>
