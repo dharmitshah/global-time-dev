@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
@@ -47,7 +46,15 @@ const TIME_ZONES = {
     'America/Sao_Paulo', 'America/Scoresbysund', 'America/Sitka', 'America/St_Johns',
     'America/Swift_Current', 'America/Tegucigalpa', 'America/Thule', 'America/Tijuana',
     'America/Toronto', 'America/Vancouver', 'America/Whitehorse', 'America/Winnipeg',
-    'America/Yakutat', 'America/Yellowknife'
+    'America/Yakutat', 'America/Yellowknife',
+    'America/Chicago', // Dallas, Houston, Austin
+    'America/Los_Angeles', // San Francisco, Seattle
+    'America/Phoenix', // Phoenix
+    'America/Denver', // Denver
+    'America/Detroit', // Detroit
+    'America/Indiana/Indianapolis', // Indianapolis
+    'America/Kentucky/Louisville', // Louisville
+    'America/New_York', // Atlanta, Miami, Boston, Washington DC
   ],
   'Antarctica': [
     'Antarctica/Casey', 'Antarctica/Davis', 'Antarctica/DumontDUrville', 'Antarctica/Macquarie',
@@ -112,12 +119,40 @@ const TIME_ZONES = {
   ]
 };
 
-// Popular time zones that should appear at the top
+// Additional metadata for enhanced search
+const TIMEZONE_METADATA: Record<string, {state?: string, country: string, city: string}> = {
+  'America/Chicago': { country: 'USA', state: 'Texas', city: 'Dallas/Houston/Austin' },
+  'America/Los_Angeles': { country: 'USA', state: 'California', city: 'Los Angeles/San Francisco/Seattle' },
+  'America/New_York': { country: 'USA', state: 'New York', city: 'New York/Atlanta/Miami' },
+  'America/Phoenix': { country: 'USA', state: 'Arizona', city: 'Phoenix' },
+  'America/Denver': { country: 'USA', state: 'Colorado', city: 'Denver' },
+  'Asia/Kolkata': { country: 'India', city: 'Mumbai/Delhi/Bangalore/Chennai' },
+  'Asia/Shanghai': { country: 'China', city: 'Shanghai/Beijing' },
+  'Asia/Tokyo': { country: 'Japan', city: 'Tokyo' },
+  'Asia/Dubai': { country: 'UAE', city: 'Dubai/Abu Dhabi' },
+  'Asia/Singapore': { country: 'Singapore', city: 'Singapore' },
+  'Europe/London': { country: 'UK', city: 'London' },
+  'Europe/Paris': { country: 'France', city: 'Paris' },
+  'Europe/Berlin': { country: 'Germany', city: 'Berlin/Munich' },
+  'Australia/Sydney': { country: 'Australia', state: 'New South Wales', city: 'Sydney' },
+  'Australia/Melbourne': { country: 'Australia', state: 'Victoria', city: 'Melbourne' },
+  'Australia/Perth': { country: 'Australia', state: 'Western Australia', city: 'Perth' },
+  'Africa/Lagos': { country: 'Nigeria', city: 'Lagos' },
+  'Africa/Cairo': { country: 'Egypt', city: 'Cairo' },
+  'Africa/Johannesburg': { country: 'South Africa', city: 'Johannesburg' },
+  'America/Sao_Paulo': { country: 'Brazil', city: 'São Paulo' },
+  'America/Mexico_City': { country: 'Mexico', city: 'Mexico City' },
+  'America/Toronto': { country: 'Canada', state: 'Ontario', city: 'Toronto' },
+  'America/Vancouver': { country: 'Canada', state: 'British Columbia', city: 'Vancouver' },
+};
+
+// Popular time zones that should appear at the top - expanded with more cities
 const POPULAR_TIMEZONES = [
-  'America/Los_Angeles', // US West Coast
-  'America/Denver',      // US Mountain
-  'America/Chicago',     // US Central
-  'America/New_York',    // US East Coast
+  'America/Los_Angeles', // US West Coast, San Francisco, Seattle
+  'America/Denver',      // US Mountain, Denver
+  'America/Chicago',     // US Central, Dallas, Houston, Austin
+  'America/New_York',    // US East Coast, Atlanta, Miami, Boston, Washington DC
+  'America/Phoenix',     // Phoenix
   'America/Toronto',     // Canada Eastern
   'America/Vancouver',   // Canada Western
   'America/Mexico_City', // Mexico
@@ -128,12 +163,16 @@ const POPULAR_TIMEZONES = [
   'Europe/Moscow',       // Russia
   'Africa/Cairo',        // Egypt
   'Africa/Johannesburg', // South Africa
+  'Africa/Lagos',        // Nigeria
   'Asia/Dubai',          // UAE
-  'Asia/Kolkata',        // India
+  'Asia/Kolkata',        // India - Mumbai, Delhi, Bangalore, Chennai
   'Asia/Singapore',      // Singapore
   'Asia/Tokyo',          // Japan
-  'Asia/Shanghai',       // China
+  'Asia/Shanghai',       // China - Beijing, Shanghai
+  'Asia/Seoul',          // South Korea
+  'Asia/Hong_Kong',      // Hong Kong
   'Australia/Sydney',    // Australia Eastern
+  'Australia/Melbourne', // Australia Melbourne
   'Australia/Perth',     // Australia Western
   'Pacific/Auckland',    // New Zealand
 ];
@@ -195,15 +234,32 @@ const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps
     }));
   };
 
-  // Filter time zones based on search term
+  // Get metadata for a timezone to enhance display and searching
+  const getTimeZoneMetadata = (zone: string) => {
+    return TIMEZONE_METADATA[zone] || {
+      country: zone.split('/')[0],
+      city: formatTimeZone(zone)
+    };
+  };
+
+  // Filter time zones based on search term - now includes state and country in search
   const getFilteredTimeZones = () => {
     if (!search) return availableTimeZones;
     
-    return availableTimeZones.filter(zone => 
-      zone.toLowerCase().includes(search.toLowerCase()) ||
-      formatTimeZone(zone).toLowerCase().includes(search.toLowerCase()) ||
-      getCurrentTime(zone).toLowerCase().includes(search.toLowerCase())
-    );
+    const searchLower = search.toLowerCase();
+    
+    return availableTimeZones.filter(zone => {
+      // Get metadata for the timezone
+      const metadata = getTimeZoneMetadata(zone);
+      
+      // Check if the search term matches any metadata field
+      return zone.toLowerCase().includes(searchLower) ||
+        formatTimeZone(zone).toLowerCase().includes(searchLower) || 
+        getCurrentTime(zone).toLowerCase().includes(searchLower) ||
+        metadata.country.toLowerCase().includes(searchLower) ||
+        (metadata.state?.toLowerCase().includes(searchLower) || false) ||
+        metadata.city.toLowerCase().includes(searchLower);
+    });
   };
 
   // Group time zones by region for display
@@ -212,8 +268,15 @@ const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps
   // Filter popular time zones based on search
   const filteredPopular = POPULAR_TIMEZONES.filter(zone => 
     !selectedTimeZones.includes(zone) &&
-    (zone.toLowerCase().includes(search.toLowerCase()) ||
-     formatTimeZone(zone).toLowerCase().includes(search.toLowerCase()))
+    (search ? (
+      // Enhanced search for popular zones
+      zone.toLowerCase().includes(search.toLowerCase()) ||
+      formatTimeZone(zone).toLowerCase().includes(search.toLowerCase()) ||
+      getCurrentTime(zone).toLowerCase().includes(search.toLowerCase()) ||
+      (TIMEZONE_METADATA[zone]?.country || '').toLowerCase().includes(search.toLowerCase()) ||
+      (TIMEZONE_METADATA[zone]?.state || '').toLowerCase().includes(search.toLowerCase()) ||
+      (TIMEZONE_METADATA[zone]?.city || '').toLowerCase().includes(search.toLowerCase())
+    ) : true)
   );
   
   // Get filtered time zones that aren't in popular list
@@ -249,7 +312,7 @@ const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps
       <PopoverContent className="w-full sm:w-[320px] p-0 bg-navy-light border-slate-dark">
         <Command className="bg-transparent">
           <CommandInput 
-            placeholder="Search time zones..." 
+            placeholder="Search by city, state, country..." 
             className="h-9 text-slate-light"
             value={search}
             onValueChange={setSearch}
@@ -259,20 +322,27 @@ const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps
             <ScrollArea className="h-[400px]">
               {filteredPopular.length > 0 && (
                 <CommandGroup heading="Popular time zones">
-                  {filteredPopular.map(zone => (
-                    <CommandItem
-                      key={zone}
-                      value={zone}
-                      onSelect={() => handleSelect(zone)}
-                      className="flex items-center justify-between cursor-pointer hover:bg-navy hover:text-cyan"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span>{formatTimeZone(zone)}</span>
-                        <span className="text-xs text-cyan">{getCurrentTime(zone)}</span>
-                      </div>
-                      <span className="text-xs text-slate">{zone.split('/')[0]}</span>
-                    </CommandItem>
-                  ))}
+                  {filteredPopular.map(zone => {
+                    const metadata = getTimeZoneMetadata(zone);
+                    return (
+                      <CommandItem
+                        key={zone}
+                        value={zone}
+                        onSelect={() => handleSelect(zone)}
+                        className="flex items-center justify-between cursor-pointer hover:bg-navy hover:text-cyan"
+                      >
+                        <div className="flex flex-col">
+                          <div className="flex items-center gap-2">
+                            <span>{metadata.city}</span>
+                            <span className="text-xs text-cyan">{getCurrentTime(zone)}</span>
+                          </div>
+                          <span className="text-xs text-slate">
+                            {metadata.state ? `${metadata.state}, ${metadata.country}` : metadata.country}
+                          </span>
+                        </div>
+                      </CommandItem>
+                    );
+                  })}
                 </CommandGroup>
               )}
               
@@ -292,20 +362,25 @@ const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps
                     </button>
                   }
                 >
-                  {expandedRegions[region] && groupedTimeZones[region].map(zone => (
-                    <CommandItem
-                      key={zone}
-                      value={zone}
-                      onSelect={() => handleSelect(zone)}
-                      className="flex items-center justify-between cursor-pointer hover:bg-navy hover:text-cyan"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span>{formatTimeZone(zone)}</span>
-                        <span className="text-xs text-cyan">{getCurrentTime(zone)}</span>
-                      </div>
-                      <span className="text-xs text-slate">{zone}</span>
-                    </CommandItem>
-                  ))}
+                  {expandedRegions[region] && groupedTimeZones[region].map(zone => {
+                    const metadata = getTimeZoneMetadata(zone);
+                    return (
+                      <CommandItem
+                        key={zone}
+                        value={zone}
+                        onSelect={() => handleSelect(zone)}
+                        className="flex items-center justify-between cursor-pointer hover:bg-navy hover:text-cyan"
+                      >
+                        <div className="flex flex-col">
+                          <div className="flex items-center gap-2">
+                            <span>{formatTimeZone(zone)}</span>
+                            <span className="text-xs text-cyan">{getCurrentTime(zone)}</span>
+                          </div>
+                          <span className="text-xs text-slate">{zone}</span>
+                        </div>
+                      </CommandItem>
+                    );
+                  })}
                 </CommandGroup>
               ))}
             </ScrollArea>
