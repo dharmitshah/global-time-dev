@@ -32,7 +32,7 @@ const Index = () => {
         <section className="py-8 md:py-16">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-light mb-4">
-              Time conversion for <span className="text-cyan terminal-prompt">developers</span>
+              Time conversion for <span className="text-cyan terminal-prompt">developers worldwide</span>
             </h2>
             <p className="text-lg text-slate mb-8 max-w-2xl mx-auto">
               Convert timestamps across global time zones, parse log timestamps, and collaborate seamlessly with distributed teams.
