@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -20,6 +19,7 @@ import { Clock, Menu, ChevronDown } from 'lucide-react';
 const mainRoutes = [
   { name: 'Home', path: '/' },
   { name: 'Meeting Scheduler', path: '/meeting-scheduler' },
+  { name: 'EventLink', path: '/eventlink' },
 ];
 
 const conversionRoutes = [
