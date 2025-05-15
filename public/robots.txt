@@ -63,14 +63,11 @@ Allow: /
 User-agent: Baiduspider
 Allow: /
 
-# Specify any assets that shouldn't be indexed
-# Disallow: /assets/private/
-
 # No delay for specific pages with important content
 User-agent: *
 Crawl-delay: 5
 
-# Additional keywords for search engines (uncommented for better indexing)
+# Keywords for search engines (uncommented for better indexing)
 # timezone converter, world clock, UTC to IST, UTC to EST, time conversion app
 # remote work tools, global time converter, sync time, time zone meeting planner
 # developer time tools, time difference calculator, time zone map, international time
