@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from "@/hooks/use-toast";
 import { format } from 'date-fns';
-import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz';
+import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 import TimeZoneCard from '@/components/TimeZoneCard';
 import Footer from '@/components/Footer';
 import { Plane, Clock } from 'lucide-react';
@@ -46,10 +46,10 @@ const TimeZoneTravelPlanner = () => {
       }
 
       // Convert the departure time to UTC
-      const departureUTCTime = zonedTimeToUtc(departureDate, departureTimeZone);
+      const departureUTCTime = fromZonedTime(departureDate, departureTimeZone);
 
       // Convert the UTC time to the arrival time zone
-      const arrivalTime = utcToZonedTime(departureUTCTime, arrivalTimeZone);
+      const arrivalTime = toZonedTime(departureUTCTime, arrivalTimeZone);
 
       // Format the arrival time
       const formattedArrivalTime = format(arrivalTime, 'MMMM dd, yyyy hh:mm:ss a zzz');
