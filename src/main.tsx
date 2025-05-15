@@ -1,3 +1,4 @@
+
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -188,4 +189,5 @@ document.head.appendChild(faqScriptTag);
 // Update document title with keyword-rich title
 document.title = "Sync My Clock - Free Online Timezone Converter | UTC to IST | UTC to EST | World Clock | Global Time Tool";
 
-createRoot(document.getElementById("root")!).render(<App />);
+// Remove this duplicate root rendering
+// createRoot(document.getElementById("root")!).render(<App />);
