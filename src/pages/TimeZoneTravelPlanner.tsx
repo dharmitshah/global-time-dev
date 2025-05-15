@@ -1,16 +1,15 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from "@/hooks/use-toast";
-import { format, addHours } from 'date-fns';
-import { fromZonedTime, toZonedTime } from 'date-fns-tz';
+import { format } from 'date-fns';
+import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz';
 import TimeZoneCard from '@/components/TimeZoneCard';
 import Footer from '@/components/Footer';
-import Navigation from '@/components/Navigation';
 import { Plane, Clock } from 'lucide-react';
 
 const TimeZoneTravelPlanner = () => {
@@ -18,25 +17,9 @@ const TimeZoneTravelPlanner = () => {
   const [departureTimeZone, setDepartureTimeZone] = useState<string>('');
   const [arrivalTimeZone, setArrivalTimeZone] = useState<string>('');
   const [calculatedArrivalTime, setCalculatedArrivalTime] = useState<string>('');
-  const [timeZones, setTimeZones] = useState<string[]>([]);
   const { toast } = useToast();
 
-  useEffect(() => {
-    // Fetch time zones from the API
-    fetch('https://worldtimeapi.org/api/timezone')
-      .then(response => response.json())
-      .then(data => {
-        setTimeZones(data);
-      })
-      .catch(error => {
-        console.error("Error fetching time zones:", error);
-        toast({
-          title: "Error",
-          description: "Failed to fetch time zones. Please try again later.",
-          variant: "destructive",
-        });
-      });
-  }, [toast]);
+  // We've removed the time zones fetch that was causing the error
 
   const calculateArrivalTime = () => {
     if (!departureTime || !departureTimeZone || !arrivalTimeZone) {
@@ -63,10 +46,10 @@ const TimeZoneTravelPlanner = () => {
       }
 
       // Convert the departure time to UTC
-      const departureUTCTime = fromZonedTime(departureDate, departureTimeZone);
+      const departureUTCTime = zonedTimeToUtc(departureDate, departureTimeZone);
 
       // Convert the UTC time to the arrival time zone
-      const arrivalTime = toZonedTime(departureUTCTime, arrivalTimeZone);
+      const arrivalTime = utcToZonedTime(departureUTCTime, arrivalTimeZone);
 
       // Format the arrival time
       const formattedArrivalTime = format(arrivalTime, 'MMMM dd, yyyy hh:mm:ss a zzz');
@@ -87,9 +70,7 @@ const TimeZoneTravelPlanner = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navigation />
-      
+    <div className="min-h-screen flex flex-col">      
       <main className="flex-1 container max-w-6xl px-4 py-8 mx-auto">
         <h1 className="text-3xl font-bold mb-2 text-slate-light flex items-center gap-2">
           <Plane className="h-7 w-7 text-cyan" />
@@ -117,7 +98,7 @@ const TimeZoneTravelPlanner = () => {
               <Input
                 type="text"
                 id="departure-timezone"
-                placeholder="Enter departure time zone"
+                placeholder="Enter departure time zone (e.g. America/New_York)"
                 value={departureTimeZone}
                 onChange={(e) => setDepartureTimeZone(e.target.value)}
               />
@@ -128,7 +109,7 @@ const TimeZoneTravelPlanner = () => {
               <Input
                 type="text"
                 id="arrival-timezone"
-                placeholder="Enter arrival time zone"
+                placeholder="Enter arrival time zone (e.g. Europe/London)"
                 value={arrivalTimeZone}
                 onChange={(e) => setArrivalTimeZone(e.target.value)}
               />
