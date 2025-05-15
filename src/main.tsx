@@ -1,6 +1,16 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
+import PreRenderHelper from './components/PreRenderHelper.tsx'
+
+// Add prerender helper for SPA SEO
+const root = createRoot(document.getElementById("root")!);
+root.render(
+  <>
+    <PreRenderHelper />
+    <App />
+  </>
+);
 
 // Enhanced meta tags for SEO
 const metaTags = [
