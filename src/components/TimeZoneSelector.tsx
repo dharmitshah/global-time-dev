@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
@@ -6,9 +7,12 @@ import { Check, ChevronsUpDown, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
+// Create a unified interface that works for both usages
 interface TimeZoneSelectorProps {
-  onSelect: (timeZone: string) => void;
-  selectedTimeZones: string[];
+  value?: string;
+  onChange?: (timeZone: string) => void;
+  onSelect?: (timeZone: string) => void;
+  selectedTimeZones?: string[];
 }
 
 // Comprehensive list of timezones organized by continent/region
@@ -177,12 +181,18 @@ const POPULAR_TIMEZONES = [
   'Pacific/Auckland',    // New Zealand
 ];
 
-const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps) => {
+const TimeZoneSelector = ({ value, onChange, onSelect, selectedTimeZones = [] }: TimeZoneSelectorProps) => {
   const [open, setOpen] = useState(false);
   const [timeZones, setTimeZones] = useState<string[]>([]);
-  const [value, setValue] = useState("");
+  const [innerValue, setValue] = useState(value || "");
   const [search, setSearch] = useState("");
   const [expandedRegions, setExpandedRegions] = useState<Record<string, boolean>>({});
+  
+  useEffect(() => {
+    if (value !== undefined) {
+      setValue(value);
+    }
+  }, [value]);
   
   useEffect(() => {
     try {
@@ -199,8 +209,10 @@ const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps
   const handleSelect = (timeZone: string) => {
     setValue(timeZone);
     setOpen(false);
-    onSelect(timeZone);
-    setValue(""); // Reset value after selection
+    
+    // Support both callback patterns
+    if (onChange) onChange(timeZone);
+    if (onSelect) onSelect(timeZone);
   };
   
   // Simplify timezone name for display
@@ -304,7 +316,7 @@ const TimeZoneSelector = ({ onSelect, selectedTimeZones }: TimeZoneSelectorProps
         >
           <span className="flex items-center gap-2">
             <Globe className="h-4 w-4 text-cyan" />
-            {value ? formatTimeZone(value) : "Add a time zone..."}
+            {innerValue ? formatTimeZone(innerValue) : "Add a time zone..."}
           </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

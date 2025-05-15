@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { TimeZoneSelector } from '@/components/TimeZoneSelector';
+import TimeZoneSelector from '@/components/TimeZoneSelector';
 import { toast } from '@/components/ui/use-toast';
 import { Progress } from '@/components/ui/progress';
 

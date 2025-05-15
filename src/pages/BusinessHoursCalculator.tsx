@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { Clock, Calendar, Building2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { TimeZoneSelector } from '@/components/TimeZoneSelector';
+import TimeZoneSelector from '@/components/TimeZoneSelector';
 import { toast } from '@/components/ui/use-toast';
 import { format, addHours } from 'date-fns';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -210,8 +210,8 @@ const BusinessHoursCalculator = () => {
                       <div>
                         <label className="block text-sm mb-2">Time Zone</label>
                         <TimeZoneSelector
-                          value={newRegion.timeZone || 'UTC'}
-                          onChange={(zone) => setNewRegion({...newRegion, timeZone: zone})}
+                          selectedTimeZones={regions.map(r => r.timeZone)}
+                          onSelect={(zone) => setNewRegion({...newRegion, timeZone: zone})}
                         />
                       </div>
                       <div>
