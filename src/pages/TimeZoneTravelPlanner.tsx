@@ -10,6 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TimeZoneSelector from '@/components/TimeZoneSelector';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
+import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 const TimeZoneTravelPlanner = () => {
   const { toast } = useToast();
@@ -19,22 +21,41 @@ const TimeZoneTravelPlanner = () => {
   const [flightHours, setFlightHours] = useState(8);
   const [jetlagDays, setJetlagDays] = useState(3);
 
-  const calculateRecoveryDays = () => {
-    const departure = new Date(departureDate);
-    const hourDiff = getTimezoneOffsetHours(destinationZone) - getTimezoneOffsetHours(departureZone);
-    const absoluteHourDiff = Math.abs(hourDiff);
+  // Calculate time difference between two timezones in hours
+  const calculateTimeDifference = () => {
+    if (!departureZone || !destinationZone) return 0;
     
-    // Common rule: 1 day of recovery per 1-2 timezone hours crossed
-    return Math.ceil(absoluteHourDiff / 2);
+    const now = new Date();
+    
+    // Get departure timezone offset in minutes
+    const departureTZDate = new Date(formatInTimeZone(now, departureZone, "yyyy-MM-dd'T'HH:mm:ss.SSS"));
+    const departureTZOffset = departureTZDate.getTimezoneOffset();
+    
+    // Get destination timezone offset in minutes
+    const destinationTZDate = new Date(formatInTimeZone(now, destinationZone, "yyyy-MM-dd'T'HH:mm:ss.SSS"));
+    const destinationTZOffset = destinationTZDate.getTimezoneOffset();
+    
+    // Calculate difference in hours (convert from minutes)
+    return (departureTZOffset - destinationTZOffset) / 60;
   };
 
-  const getTimezoneOffsetHours = (timezone: string) => {
-    // This is a simplified calculation
-    const now = new Date();
-    const tzString = now.toLocaleString('en-US', { timeZone: timezone });
-    const tzDate = new Date(tzString);
-    const hoursDiff = (tzDate.getHours() - now.getUTCHours()) % 24;
-    return hoursDiff < -12 ? hoursDiff + 24 : (hoursDiff > 12 ? hoursDiff - 24 : hoursDiff);
+  const calculateRecoveryDays = () => {
+    const hourDiff = Math.abs(calculateTimeDifference());
+    
+    // Common rule: 1 day of recovery per 1-2 timezone hours crossed
+    const baseRecoveryDays = Math.ceil(hourDiff / 2);
+    
+    // Apply additional factors (long flights increase recovery time)
+    let adjustedRecoveryDays = baseRecoveryDays;
+    
+    if (flightHours > 10) {
+      adjustedRecoveryDays += 1;
+    }
+    if (flightHours > 15) {
+      adjustedRecoveryDays += 1;
+    }
+    
+    return adjustedRecoveryDays;
   };
 
   const handlePlanTrip = () => {
@@ -46,14 +67,14 @@ const TimeZoneTravelPlanner = () => {
   };
 
   const getJetlagSeverity = () => {
-    const hourDiff = Math.abs(getTimezoneOffsetHours(destinationZone) - getTimezoneOffsetHours(departureZone));
+    const hourDiff = Math.abs(calculateTimeDifference());
     if (hourDiff <= 3) return "Mild";
     if (hourDiff <= 6) return "Moderate";
     return "Severe";
   };
 
   const getTravelDirection = () => {
-    const hourDiff = getTimezoneOffsetHours(destinationZone) - getTimezoneOffsetHours(departureZone);
+    const hourDiff = calculateTimeDifference();
     if (hourDiff > 0) return "East";
     if (hourDiff < 0) return "West";
     return "Same timezone";
@@ -65,6 +86,35 @@ const TimeZoneTravelPlanner = () => {
     if (direction === "West") return "Try staying awake longer a few days before your trip";
     return "No adjustment needed";
   };
+
+  // Calculate arrival date and time based on departure and flight duration
+  const getArrivalInfo = () => {
+    const departureTime = new Date(departureDate);
+    
+    // Calculate arrival time in departure timezone
+    const arrivalTimeInDepartureZone = new Date(departureTime.getTime() + flightHours * 60 * 60 * 1000);
+    
+    // Format for display
+    const departureFormatted = formatInTimeZone(
+      departureTime, 
+      departureZone, 
+      "MMM d, yyyy 'at' HH:mm"
+    );
+    
+    const arrivalFormatted = formatInTimeZone(
+      arrivalTimeInDepartureZone, 
+      destinationZone, 
+      "MMM d, yyyy 'at' HH:mm"
+    );
+    
+    return {
+      departureFormatted,
+      arrivalFormatted
+    };
+  };
+
+  // Display arrival info
+  const { departureFormatted, arrivalFormatted } = getArrivalInfo();
 
   return (
     <div className="min-h-screen bg-navy py-8">
@@ -131,6 +181,22 @@ const TimeZoneTravelPlanner = () => {
                   </div>
                 </div>
                 
+                <div className="mt-6 p-3 bg-navy rounded-md border border-slate-dark">
+                  <h3 className="font-semibold mb-2">Estimated Arrival</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-slate-light">Departure:</p>
+                      <p className="font-mono">{departureFormatted}</p>
+                      <p className="text-xs text-slate-light mt-1">{departureZone}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-slate-light">Arrival:</p>
+                      <p className="font-mono">{arrivalFormatted}</p>
+                      <p className="text-xs text-slate-light mt-1">{destinationZone}</p>
+                    </div>
+                  </div>
+                </div>
+                
                 <Separator className="my-6 bg-slate-dark" />
                 
                 <Button onClick={handlePlanTrip} className="w-full bg-cyan hover:bg-cyan-dark text-navy">
@@ -157,10 +223,10 @@ const TimeZoneTravelPlanner = () => {
                       <div className="flex justify-between mb-2">
                         <span>Time Zone Difference</span>
                         <span className="text-cyan font-mono">
-                          {Math.abs(getTimezoneOffsetHours(destinationZone) - getTimezoneOffsetHours(departureZone))} hours
+                          {Math.abs(calculateTimeDifference()).toFixed(1)} hours
                         </span>
                       </div>
-                      <Progress value={Math.abs(getTimezoneOffsetHours(destinationZone) - getTimezoneOffsetHours(departureZone)) * (100/24)} />
+                      <Progress value={Math.abs(calculateTimeDifference()) * (100/24)} />
                     </div>
                     
                     <div>

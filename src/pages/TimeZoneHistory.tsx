@@ -1,10 +1,10 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Clock, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import DailyTimezoneFact from '@/components/DailyTimezoneFact';
 
 const TimeZoneHistory = () => {
   return (
@@ -25,6 +25,11 @@ const TimeZoneHistory = () => {
           <h1 className="text-3xl font-bold mb-2">Time Zone History & Facts</h1>
           <p className="text-slate-light">The fascinating story of how we organize time across the globe</p>
         </header>
+        
+        {/* Add the DailyTimezoneFact component at the top of the page */}
+        <div className="mb-6">
+          <DailyTimezoneFact />
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
