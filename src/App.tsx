@@ -11,6 +11,9 @@ import UTCtoIST from "./pages/UTCtoIST";
 import UTCtoEST from "./pages/UTCtoEST";
 import TimeZoneConverterForDevelopers from "./pages/TimeZoneConverterForDevelopers";
 import WorldClockSyncTool from "./pages/WorldClockSyncTool";
+import TimeZoneTravelPlanner from "./pages/TimeZoneTravelPlanner";
+import TimeZoneHistory from "./pages/TimeZoneHistory";
+import BusinessHoursCalculator from "./pages/BusinessHoursCalculator";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +30,9 @@ const App = () => (
           <Route path="/utc-to-est" element={<UTCtoEST />} />
           <Route path="/time-zone-converter-for-developers" element={<TimeZoneConverterForDevelopers />} />
           <Route path="/world-clock-sync-tool" element={<WorldClockSyncTool />} />
+          <Route path="/time-zone-travel-planner" element={<TimeZoneTravelPlanner />} />
+          <Route path="/time-zone-history" element={<TimeZoneHistory />} />
+          <Route path="/business-hours-calculator" element={<BusinessHoursCalculator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
