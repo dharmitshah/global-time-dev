@@ -1,6 +1,6 @@
 
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem } from '@/components/ui/menubar';
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from '@/components/ui/navigation-menu';
@@ -21,6 +21,12 @@ const routes = [
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
 
   return (
     <nav className="border-b border-slate-dark bg-navy py-3 sticky top-0 z-50">
@@ -40,7 +46,7 @@ const Navigation = () => {
                     to={route.path}
                     className={cn(
                       "block px-3 py-2 text-sm hover:text-cyan transition-colors",
-                      window.location.pathname === route.path ? "text-cyan" : "text-slate-light"
+                      location.pathname === route.path ? "text-cyan" : "text-slate-light"
                     )}
                   >
                     {route.name}
@@ -71,7 +77,7 @@ const Navigation = () => {
                     to={route.path}
                     className={cn(
                       "block px-3 py-2.5 text-sm hover:text-cyan transition-colors border-b border-slate-dark last:border-0",
-                      window.location.pathname === route.path ? "text-cyan" : "text-slate-light"
+                      location.pathname === route.path ? "text-cyan" : "text-slate-light"
                     )}
                     onClick={() => setMobileMenuOpen(false)}
                   >
