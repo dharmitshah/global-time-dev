@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Clock, Globe, Users } from 'lucide-react';
@@ -10,40 +9,25 @@ import Footer from '@/components/Footer';
 const WorldClockSyncTool = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="py-6 px-4 sm:px-6 md:px-8">
-        <div className="container max-w-6xl">
-          <div className="flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-2">
-              <Clock className="h-6 w-6 text-cyan" />
-              <h1 className="text-xl font-bold tracking-tight">DevTimeZone</h1>
-            </Link>
-            <div className="flex items-center gap-2">
-              <span className="hidden sm:inline text-sm text-slate">World Clock</span>
-            </div>
-          </div>
-        </div>
-      </header>
-      
-      <main className="flex-1 container max-w-6xl px-4 sm:px-6 md:px-8 mb-8">
-        {/* Hero */}
-        <section className="py-8 md:py-12 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-light mb-4">
-            World Clock Sync Tool
-          </h1>
-          <p className="text-lg text-slate mb-8 max-w-2xl mx-auto">
-            View and compare accurate times across multiple global time zones simultaneously
-          </p>
-        </section>
+      {/* Hero */}
+      <section className="py-8 md:py-12 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-light mb-4">
+          World Clock Sync Tool
+        </h1>
+        <p className="text-lg text-slate mb-8 max-w-2xl mx-auto">
+          View and compare accurate times across multiple global time zones simultaneously
+        </p>
+      </section>
 
-        {/* Current time */}
-        <section className="mb-8">
-          <CurrentTime className="max-w-md mx-auto" />
-        </section>
-        
-        {/* Content */}
-        <section className="mb-12 text-left bg-navy-light border border-slate-dark rounded-lg p-6">
-          <h2 className="text-2xl font-bold mb-4 text-slate-light">Global Time Synchronization Made Easy</h2>
-          <p className="text-slate mb-4">
+      {/* Current time */}
+      <section className="mb-8">
+        <CurrentTime className="max-w-md mx-auto" />
+      </section>
+      
+      {/* Content */}
+      <section className="mb-12 text-left bg-navy-light border border-slate-dark rounded-lg p-6">
+        <h2 className="text-2xl font-bold mb-4 text-slate-light">Global Time Synchronization Made Easy</h2>
+        <p className="text-slate mb-4">
             The World Clock Sync Tool helps teams, travelers, and global professionals stay synchronized 
             across multiple time zones. Whether you're managing a distributed team, coordinating international 
             projects, or planning travel across regions, our tool provides accurate, real-time comparisons of 
@@ -84,20 +68,20 @@ const WorldClockSyncTool = () => {
             <Globe className="mr-2 h-4 w-4" />
             Open World Clock Tool
           </Button>
-        </section>
-        
-        {/* World clock */}
-        <section id="clock" className="mb-12">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 flex items-center gap-2 justify-center">
+      </section>
+      
+      {/* World clock */}
+      <section id="clock" className="mb-12">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 flex items-center gap-2 justify-center">
             <Globe className="h-6 w-6 text-cyan" />
             <span>World Clock Tool</span>
           </h2>
           <TimeConverter />
-        </section>
-        
-        {/* Use cases */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">Popular Use Cases</h2>
+      </section>
+      
+      {/* Use cases */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">Popular Use Cases</h2>
           
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="border border-slate-dark bg-navy-light">
@@ -143,8 +127,7 @@ const WorldClockSyncTool = () => {
               </CardContent>
             </Card>
           </div>
-        </section>
-      </main>
+      </section>
       
       <Footer />
     </div>
