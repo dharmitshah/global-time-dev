@@ -21,7 +21,6 @@ const EventLinkPage = () => {
             Perfect for coordinating meetings, webinars, and events across multiple time zones.
           </p>
         </div>
-        
         <EventLinkCreator />
       </div>
     </>

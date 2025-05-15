@@ -6,26 +6,24 @@ import EventLinkViewer from '@/components/EventLinkViewer';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const EventLinkViewPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
       setLoading(false);
     }, 500);
-    
     return () => clearTimeout(timer);
   }, []);
-  
+
   return (
     <>
       <Helmet>
         <title>View Event Details | EventLink by SyncMyClock</title>
         <meta name="description" content="View the details of this time zone-friendly event. Time is automatically adjusted to your local time zone." />
-        <meta name="robots" content="noindex" /> {/* Don't index individual event views */}
+        <meta name="robots" content="noindex" /> 
       </Helmet>
-      
       <div className="space-y-6">
         {loading ? (
           <div className="space-y-4">
