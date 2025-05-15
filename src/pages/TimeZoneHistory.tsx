@@ -4,14 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Clock, History } from 'lucide-react';
 import Footer from '@/components/Footer';
-import Navigation from '@/components/Navigation';
 import DailyTimezoneFact from '@/components/DailyTimezoneFact';
 
 const TimeZoneHistory = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation />
-      
       <main className="flex-1 container max-w-6xl px-4 py-8 mx-auto">
         <h1 className="text-3xl font-bold mb-2 text-slate-light flex items-center gap-2">
           <History className="h-7 w-7 text-cyan" />

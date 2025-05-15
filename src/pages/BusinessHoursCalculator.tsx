@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from "@/hooks/use-toast";
 import TimeZoneCard from '@/components/TimeZoneCard';
 import Footer from '@/components/Footer';
-import Navigation from '@/components/Navigation';
 import { Building, Clock } from 'lucide-react';
 
 const BusinessHoursCalculator = () => {
@@ -66,8 +66,6 @@ const BusinessHoursCalculator = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation />
-      
       <main className="flex-1 container max-w-6xl px-4 py-8 mx-auto">
         <h1 className="text-3xl font-bold mb-2 text-slate-light flex items-center gap-2">
           <Building className="h-7 w-7 text-cyan" />
