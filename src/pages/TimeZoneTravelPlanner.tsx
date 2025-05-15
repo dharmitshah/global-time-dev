@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,7 +11,7 @@ import { format } from 'date-fns';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 import TimeZoneCard from '@/components/TimeZoneCard';
 import Footer from '@/components/Footer';
-import { Plane, Clock, ZZZ } from 'lucide-react';
+import { Plane, Clock, Moon } from 'lucide-react';
 
 const TimeZoneTravelPlanner = () => {
   const [departureTime, setDepartureTime] = useState<string>('');
@@ -151,7 +150,7 @@ const TimeZoneTravelPlanner = () => {
               Travel Time Calculator
             </TabsTrigger>
             <TabsTrigger value="jetlag">
-              <ZZZ className="mr-2 h-4 w-4" /> 
+              <Moon className="mr-2 h-4 w-4" /> 
               Jet Lag Estimator
             </TabsTrigger>
           </TabsList>
@@ -273,7 +272,7 @@ const TimeZoneTravelPlanner = () => {
                   className="bg-cyan hover:bg-cyan-dark text-navy font-medium"
                   onClick={() => calculateJetlag(departureTimeZone, arrivalTimeZone)}
                 >
-                  <ZZZ className="mr-2 h-4 w-4" />
+                  <Moon className="mr-2 h-4 w-4" />
                   Calculate Jet Lag
                 </Button>
                 
