@@ -34,8 +34,13 @@ export default defineConfig(({ mode }) => ({
             'date-fns-tz',
             '@tanstack/react-query'
           ],
-          // Split UI components - fix the import to reference specific files
-          ui: Object.keys(import.meta.glob('./src/components/ui/**/*.tsx')),
+          // Define UI components chunk with explicit paths
+          ui: [
+            '@radix-ui/react-aspect-ratio',
+            '@radix-ui/react-checkbox',
+            '@radix-ui/react-collapsible',
+            // Include other UI component paths without using glob
+          ],
         },
       },
     },
