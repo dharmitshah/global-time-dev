@@ -1,3 +1,4 @@
+
 import * as React from "react"
 
 import type {
@@ -166,6 +167,14 @@ function toast({ ...props }: Toast) {
     dismiss,
     update,
   }
+}
+
+// Add mobile-friendly positioning options to toast
+toast.mobileBottom = (message: string) => {
+  toast({
+    title: message,
+    className: "fixed bottom-4 left-4 right-4 md:left-auto md:right-auto md:bottom-auto",
+  });
 }
 
 function useToast() {
