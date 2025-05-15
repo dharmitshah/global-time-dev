@@ -9,10 +9,13 @@ import CurrentTime from '@/components/CurrentTime';
 import TimeConverter from '@/components/TimeConverter';
 import LogParser from '@/components/LogParser';
 import Footer from '@/components/Footer';
+import Navigation from '@/components/Navigation';
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Navigation />
+      
       <header className="py-6 px-4 sm:px-6 md:px-8">
         <div className="container max-w-6xl">
           <div className="flex justify-between items-center">

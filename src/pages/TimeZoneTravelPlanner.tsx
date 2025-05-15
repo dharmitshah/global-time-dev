@@ -1,302 +1,170 @@
-
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { Clock, Calendar, Plane } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { Slider } from '@/components/ui/slider';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import TimeZoneSelector from '@/components/TimeZoneSelector';
-import { useToast } from '@/hooks/use-toast';
-import { Progress } from '@/components/ui/progress';
-import { format } from 'date-fns';
-import { formatInTimeZone } from 'date-fns-tz';
+import { useToast } from "@/hooks/use-toast";
+import { format, addHours } from 'date-fns';
+import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz';
+import TimeZoneCard from '@/components/TimeZoneCard';
+import Footer from '@/components/Footer';
+import Navigation from '@/components/Navigation';
+import { Plane, Clock } from 'lucide-react';
 
 const TimeZoneTravelPlanner = () => {
+  const [departureTime, setDepartureTime] = useState<string>('');
+  const [departureTimeZone, setDepartureTimeZone] = useState<string>('');
+  const [arrivalTimeZone, setArrivalTimeZone] = useState<string>('');
+  const [calculatedArrivalTime, setCalculatedArrivalTime] = useState<string>('');
+  const [timeZones, setTimeZones] = useState<string[]>([]);
   const { toast } = useToast();
-  const [departureZone, setDepartureZone] = useState('UTC');
-  const [destinationZone, setDestinationZone] = useState('America/New_York');
-  const [departureDate, setDepartureDate] = useState(new Date());
-  const [flightHours, setFlightHours] = useState(8);
-  const [jetlagDays, setJetlagDays] = useState(3);
 
-  // Calculate time difference between two timezones in hours
-  const calculateTimeDifference = () => {
-    if (!departureZone || !destinationZone) return 0;
-    
-    const now = new Date();
-    
-    // Get departure timezone offset in minutes
-    const departureTZDate = new Date(formatInTimeZone(now, departureZone, "yyyy-MM-dd'T'HH:mm:ss.SSS"));
-    const departureTZOffset = departureTZDate.getTimezoneOffset();
-    
-    // Get destination timezone offset in minutes
-    const destinationTZDate = new Date(formatInTimeZone(now, destinationZone, "yyyy-MM-dd'T'HH:mm:ss.SSS"));
-    const destinationTZOffset = destinationTZDate.getTimezoneOffset();
-    
-    // Calculate difference in hours (convert from minutes)
-    return (departureTZOffset - destinationTZOffset) / 60;
-  };
+  useEffect(() => {
+    // Fetch time zones from the API
+    fetch('https://worldtimeapi.org/api/timezone')
+      .then(response => response.json())
+      .then(data => {
+        setTimeZones(data);
+      })
+      .catch(error => {
+        console.error("Error fetching time zones:", error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch time zones. Please try again later.",
+          variant: "destructive",
+        });
+      });
+  }, [toast]);
 
-  const calculateRecoveryDays = () => {
-    const hourDiff = Math.abs(calculateTimeDifference());
-    
-    // Common rule: 1 day of recovery per 1-2 timezone hours crossed
-    const baseRecoveryDays = Math.ceil(hourDiff / 2);
-    
-    // Apply additional factors (long flights increase recovery time)
-    let adjustedRecoveryDays = baseRecoveryDays;
-    
-    if (flightHours > 10) {
-      adjustedRecoveryDays += 1;
+  const calculateArrivalTime = () => {
+    if (!departureTime || !departureTimeZone || !arrivalTimeZone) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields.",
+        variant: "destructive",
+      });
+      return;
     }
-    if (flightHours > 15) {
-      adjustedRecoveryDays += 1;
+
+    try {
+      // Parse the departure time string into a Date object
+      const departureDate = new Date(departureTime);
+      
+      // Check if the date is valid
+      if (isNaN(departureDate.getTime())) {
+        toast({
+          title: "Error",
+          description: "Invalid departure time format. Please use a valid date and time.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Convert the departure time to UTC
+      const departureUTCTime = zonedTimeToUtc(departureDate, departureTimeZone);
+
+      // Convert the UTC time to the arrival time zone
+      const arrivalTime = utcToZonedTime(departureUTCTime, arrivalTimeZone);
+
+      // Format the arrival time
+      const formattedArrivalTime = format(arrivalTime, 'MMMM dd, yyyy hh:mm:ss a zzz');
+      setCalculatedArrivalTime(formattedArrivalTime);
+
+      toast({
+        title: "Arrival Time Calculated",
+        description: `Arrival time in ${arrivalTimeZone}: ${formattedArrivalTime}`,
+      });
+    } catch (error: any) {
+      console.error("Error calculating arrival time:", error);
+      toast({
+        title: "Error",
+        description: `Failed to calculate arrival time: ${error.message}`,
+        variant: "destructive",
+      });
     }
-    
-    return adjustedRecoveryDays;
   };
-
-  const handlePlanTrip = () => {
-    const recoveryDays = calculateRecoveryDays();
-    toast({
-      title: "Trip Plan Created",
-      description: `Allow ${recoveryDays} days to adjust to the new time zone.`,
-    });
-  };
-
-  const getJetlagSeverity = () => {
-    const hourDiff = Math.abs(calculateTimeDifference());
-    if (hourDiff <= 3) return "Mild";
-    if (hourDiff <= 6) return "Moderate";
-    return "Severe";
-  };
-
-  const getTravelDirection = () => {
-    const hourDiff = calculateTimeDifference();
-    if (hourDiff > 0) return "East";
-    if (hourDiff < 0) return "West";
-    return "Same timezone";
-  };
-
-  const getSleepTips = () => {
-    const direction = getTravelDirection();
-    if (direction === "East") return "Try sleeping earlier a few days before your trip";
-    if (direction === "West") return "Try staying awake longer a few days before your trip";
-    return "No adjustment needed";
-  };
-
-  // Calculate arrival date and time based on departure and flight duration
-  const getArrivalInfo = () => {
-    const departureTime = new Date(departureDate);
-    
-    // Calculate arrival time in departure timezone
-    const arrivalTimeInDepartureZone = new Date(departureTime.getTime() + flightHours * 60 * 60 * 1000);
-    
-    // Format for display
-    const departureFormatted = formatInTimeZone(
-      departureTime, 
-      departureZone, 
-      "MMM d, yyyy 'at' HH:mm"
-    );
-    
-    const arrivalFormatted = formatInTimeZone(
-      arrivalTimeInDepartureZone, 
-      destinationZone, 
-      "MMM d, yyyy 'at' HH:mm"
-    );
-    
-    return {
-      departureFormatted,
-      arrivalFormatted
-    };
-  };
-
-  // Display arrival info
-  const { departureFormatted, arrivalFormatted } = getArrivalInfo();
 
   return (
-    <div className="min-h-screen bg-navy py-8">
-      <div className="container max-w-6xl mx-auto px-4">
-        <header className="mb-8">
-          <div className="flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-2">
-              <Clock className="h-6 w-6 text-cyan" />
-              <h1 className="text-xl font-bold tracking-tight">DevTimeZone</h1>
-            </Link>
-            <div className="flex items-center gap-2">
-              <span className="hidden sm:inline text-sm text-slate">Time Zone Travel Planner</span>
-              <Plane className="h-4 w-4 text-cyan" />
-            </div>
-          </div>
-          <Separator className="my-4 bg-slate-dark" />
-          <h1 className="text-3xl font-bold mb-2">Time Zone Travel Planner</h1>
-          <p className="text-slate-light">Plan your travel across time zones and minimize jet lag</p>
-        </header>
+    <div className="min-h-screen flex flex-col">
+      <Navigation />
+      
+      <main className="flex-1 container max-w-6xl px-4 py-8 mx-auto">
+        <h1 className="text-3xl font-bold mb-2 text-slate-light flex items-center gap-2">
+          <Plane className="h-7 w-7 text-cyan" />
+          Time Zone Travel Planner
+        </h1>
+        <p className="text-slate mb-8">Calculate arrival times across different time zones for your journeys.</p>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <Card className="bg-navy-dark border-slate-dark">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Plane className="h-5 w-5 text-cyan" />
-                  Trip Details
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm mb-2">Departure Location</label>
-                    <TimeZoneSelector
-                      value={departureZone}
-                      onChange={zone => setDepartureZone(zone)}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm mb-2">Destination Location</label>
-                    <TimeZoneSelector
-                      value={destinationZone}
-                      onChange={zone => setDestinationZone(zone)}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm mb-2">Departure Date</label>
-                    <input
-                      type="date"
-                      className="w-full bg-navy rounded-md border border-slate-dark p-2"
-                      value={departureDate.toISOString().split('T')[0]}
-                      onChange={(e) => setDepartureDate(new Date(e.target.value))}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm mb-2">Flight Duration (hours): {flightHours}</label>
-                    <Slider
-                      value={[flightHours]}
-                      min={1}
-                      max={24}
-                      step={1}
-                      onValueChange={(value) => setFlightHours(value[0])}
-                    />
-                  </div>
-                </div>
-                
-                <div className="mt-6 p-3 bg-navy rounded-md border border-slate-dark">
-                  <h3 className="font-semibold mb-2">Estimated Arrival</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm text-slate-light">Departure:</p>
-                      <p className="font-mono">{departureFormatted}</p>
-                      <p className="text-xs text-slate-light mt-1">{departureZone}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-light">Arrival:</p>
-                      <p className="font-mono">{arrivalFormatted}</p>
-                      <p className="text-xs text-slate-light mt-1">{destinationZone}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <Separator className="my-6 bg-slate-dark" />
-                
-                <Button onClick={handlePlanTrip} className="w-full bg-cyan hover:bg-cyan-dark text-navy">
-                  Generate Travel Plan
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+        <Card className="border-slate-dark bg-navy-light">
+          <CardHeader>
+            <CardTitle className="text-xl text-slate-light">Travel Details</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="departure-time">Departure Time</Label>
+              <Input
+                type="datetime-local"
+                id="departure-time"
+                value={departureTime}
+                onChange={(e) => setDepartureTime(e.target.value)}
+              />
+            </div>
+            
+            <div className="grid gap-2">
+              <Label htmlFor="departure-timezone">Departure Time Zone</Label>
+              <Input
+                type="text"
+                id="departure-timezone"
+                placeholder="Enter departure time zone"
+                value={departureTimeZone}
+                onChange={(e) => setDepartureTimeZone(e.target.value)}
+              />
+            </div>
+            
+            <div className="grid gap-2">
+              <Label htmlFor="arrival-timezone">Arrival Time Zone</Label>
+              <Input
+                type="text"
+                id="arrival-timezone"
+                placeholder="Enter arrival time zone"
+                value={arrivalTimeZone}
+                onChange={(e) => setArrivalTimeZone(e.target.value)}
+              />
+            </div>
+            
+            <Button className="bg-cyan hover:bg-cyan-dark text-navy font-medium" onClick={calculateArrivalTime}>
+              <Clock className="mr-2 h-4 w-4" />
+              Calculate Arrival Time
+            </Button>
+            
+            {calculatedArrivalTime && (
+              <div className="mt-4">
+                <Separator className="my-4 bg-slate-dark" />
+                <h2 className="text-lg font-semibold text-slate-light">Calculated Arrival Time:</h2>
+                <p className="text-slate">{calculatedArrivalTime}</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+        
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6">
+            <span className="text-cyan">&lt;</span> Time Zone Cards <span className="text-cyan">/&gt;</span>
+          </h2>
           
-          <div>
-            <Tabs defaultValue="jetlag">
-              <TabsList className="grid grid-cols-2 mb-4">
-                <TabsTrigger value="jetlag">Jet Lag</TabsTrigger>
-                <TabsTrigger value="tips">Travel Tips</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="jetlag">
-                <Card className="bg-navy-dark border-slate-dark">
-                  <CardHeader>
-                    <CardTitle>Jet Lag Assessment</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span>Time Zone Difference</span>
-                        <span className="text-cyan font-mono">
-                          {Math.abs(calculateTimeDifference()).toFixed(1)} hours
-                        </span>
-                      </div>
-                      <Progress value={Math.abs(calculateTimeDifference()) * (100/24)} />
-                    </div>
-                    
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span>Expected Recovery Time</span>
-                        <span className="text-cyan font-mono">{calculateRecoveryDays()} days</span>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <span>Jet Lag Severity</span>
-                        <span className={`font-mono ${getJetlagSeverity() === "Severe" ? "text-red-400" : 
-                                            getJetlagSeverity() === "Moderate" ? "text-yellow-400" : 
-                                            "text-green-400"}`}>
-                          {getJetlagSeverity()}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <span>Travel Direction</span>
-                        <span className="text-cyan font-mono">{getTravelDirection()}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="tips">
-                <Card className="bg-navy-dark border-slate-dark">
-                  <CardHeader>
-                    <CardTitle>Travel Recommendations</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h3 className="font-semibold mb-1">Before Your Trip</h3>
-                      <p className="text-sm text-slate-light">{getSleepTips()}</p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-semibold mb-1">During Your Flight</h3>
-                      <p className="text-sm text-slate-light">
-                        {flightHours > 8 
-                          ? "Try to sleep according to the destination time zone" 
-                          : "Stay hydrated and avoid alcohol for better recovery"}
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-semibold mb-1">Upon Arrival</h3>
-                      <p className="text-sm text-slate-light">
-                        Spend time in natural light during daytime hours at your destination
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-semibold mb-1">Adjustment Period</h3>
-                      <p className="text-sm text-slate-light">
-                        Allow {calculateRecoveryDays()} days to fully adjust to the new time zone
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {departureTimeZone && (
+              <TimeZoneCard timeZone={departureTimeZone} />
+            )}
+            {arrivalTimeZone && (
+              <TimeZoneCard timeZone={arrivalTimeZone} />
+            )}
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
+      
+      <Footer />
     </div>
   );
 };
