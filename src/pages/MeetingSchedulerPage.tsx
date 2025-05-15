@@ -4,6 +4,7 @@ import { Separator } from '@/components/ui/separator';
 import { Users, Clock, ArrowDown } from 'lucide-react';
 import MeetingScheduler from '@/components/MeetingScheduler';
 import Footer from '@/components/Footer';
+import { Link } from 'react-router-dom';
 
 const MeetingSchedulerPage = () => {
   return (
@@ -11,10 +12,10 @@ const MeetingSchedulerPage = () => {
       <header className="py-6 px-4 sm:px-6 md:px-8 bg-navy-dark">
         <div className="container max-w-6xl">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <Clock className="h-6 w-6 text-cyan" />
               <h1 className="text-xl font-bold tracking-tight">DevTimeZone</h1>
-            </div>
+            </Link>
             <div className="flex items-center gap-2">
               <span className="hidden sm:inline text-sm text-slate">Time management for developers</span>
               <Button 
