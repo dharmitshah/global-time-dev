@@ -16,7 +16,17 @@
       });
     </script>
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="aae279e0-37c7-49b8-b1f1-e12ac2c9d0d4" type="text/javascript" async></script>
-    <!--Banner script here!-->
+    <!-- CookieDeclaration Banner - Enhanced for SEO and GDPR -->
+    <script id="CookieBanner" type="text/javascript">
+      document.addEventListener('CookiebotOnAccept', function (e) {
+        if (Cookiebot.consent.analytics) {
+          // Enable Google Analytics
+          gtag('consent', 'update', {
+            'analytics_storage': 'granted'
+          });
+        }
+      });
+    </script>
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,7 +59,7 @@
       });
     </script>
     
-    <!-- Schema.org markup for Google -->
+    <!-- Enhanced Schema.org markup for Google -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -70,29 +80,57 @@
         "url": "https://syncmyclock.com/"
       },
       "screenshot": "https://syncmyclock.com/og-image.png",
-      "featureList": "Time zone conversion, Log timestamp parsing, Global meeting scheduler",
+      "featureList": "Time zone conversion, Log timestamp parsing, Global meeting scheduler, World clock tool, UTC to EST converter, UTC to IST converter",
       "sameAs": [
-        "https://syncmyclock.com/meeting-scheduler"
+        "https://syncmyclock.com/meeting-scheduler",
+        "https://syncmyclock.com/utc-to-ist",
+        "https://syncmyclock.com/utc-to-est",
+        "https://syncmyclock.com/world-clock-sync-tool",
+        "https://syncmyclock.com/time-zone-converter-for-developers"
       ],
       "potentialAction": {
         "@type": "UseAction",
         "target": "https://syncmyclock.com/"
-      }
+      },
+      "keywords": "timezone converter, world clock, UTC to IST, UTC to EST, time conversion app, remote work tools, global time converter, sync time, time zone meeting planner"
     }
     </script>
 
-    <!-- Website Schema Markup -->
+    <!-- Website Schema Markup - Enhanced with more details -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "DevTimeZone",
       "url": "https://syncmyclock.com",
+      "description": "Free online timezone converter, world clock, and meeting scheduler for remote teams and global professionals.",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://syncmyclock.com/?q={search_term_string}",
         "query-input": "required name=search_term_string"
-      }
+      },
+      "hasPart": [
+        {
+          "@type": "WebPage",
+          "url": "https://syncmyclock.com/utc-to-ist",
+          "name": "UTC to IST Converter"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://syncmyclock.com/utc-to-est",
+          "name": "UTC to EST Converter"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://syncmyclock.com/meeting-scheduler",
+          "name": "Global Meeting Scheduler"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://syncmyclock.com/world-clock-sync-tool",
+          "name": "World Clock Sync Tool"
+        }
+      ]
     }
     </script>
 
@@ -119,11 +157,12 @@
         "World Clock Sync Tool",
         "Global Time Converter",
         "TimezoneSyncApp"
-      ]
+      ],
+      "isAccessibleForFree": true
     }
     </script>
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook - Enhanced -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://syncmyclock.com/" />
     <meta property="og:title" content="DevTimeZone - Best Free Online Timezone Converter | World Clock" />
@@ -132,7 +171,7 @@
     <meta property="og:site_name" content="DevTimeZone" />
     <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
+    <!-- Twitter - Enhanced -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://syncmyclock.com/" />
     <meta name="twitter:title" content="DevTimeZone - Best Free Online Timezone Converter | World Clock" />
@@ -144,7 +183,7 @@
     <!-- Google Search Console verification -->
     <meta name="google-site-verification" content="your-verification-code" />
     
-    <!-- Additional SEO meta tags -->
+    <!-- Additional SEO meta tags - Enhanced -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="language" content="English" />
     <meta name="revisit-after" content="7 days" />
@@ -152,6 +191,16 @@
     <meta name="rating" content="general" />
     <meta name="msapplication-TileColor" content="#2b5797" />
     <meta name="theme-color" content="#0f172a" />
+    
+    <!-- Additional keywords for better SEO -->
+    <meta name="keywords" content="timezone converter, world clock, UTC to IST, UTC to EST, time conversion app, remote work tools, global time converter, sync time, time zone meeting planner, developer time tools, time difference calculator, time zone map, international time, global clock, military time converter, epoch time converter" />
+    
+    <!-- Canonical URL to prevent duplicate content issues -->
+    <link rel="canonical" href="https://syncmyclock.com/" />
+    
+    <!-- Additional linking for key pages -->
+    <link rel="alternate" hreflang="en" href="https://syncmyclock.com/" />
+    <link rel="alternate" href="https://syncmyclock.com/" hreflang="x-default" />
     
     <!-- Structured Data - Product, Breadcrumbs, FAQs -->
     <script type="application/ld+json">
@@ -200,6 +249,21 @@
         "position": 2,
         "name": "Business Hours Calculator",
         "item": "https://syncmyclock.com/business-hours-calculator"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "UTC to IST Converter",
+        "item": "https://syncmyclock.com/utc-to-ist"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "UTC to EST Converter",
+        "item": "https://syncmyclock.com/utc-to-est"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "World Clock Sync Tool",
+        "item": "https://syncmyclock.com/world-clock-sync-tool"
       }]
     }
     </script>

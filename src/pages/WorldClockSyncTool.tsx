@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Clock, Globe, Users } from 'lucide-react';
@@ -5,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import CurrentTime from '@/components/CurrentTime';
 import TimeConverter from '@/components/TimeConverter';
 import Footer from '@/components/Footer';
+import BacklinkPrompt from '@/components/BacklinkPrompt';
 
 const WorldClockSyncTool = () => {
   return (
@@ -127,6 +129,36 @@ const WorldClockSyncTool = () => {
               </CardContent>
             </Card>
           </div>
+      </section>
+      
+      {/* NEW: Added Backlink Section */}
+      <section className="mb-12">
+        <BacklinkPrompt />
+      </section>
+      
+      {/* NEW: SEO Content for World Clock */}
+      <section className="mb-12 bg-navy-light border border-slate-dark rounded-lg p-6">
+        <h2 className="text-2xl font-bold mb-4 text-slate-light">The Ultimate World Clock for Global Teams</h2>
+        <p className="text-slate mb-4">
+          Our World Clock Sync Tool is more than just a time display - it's a comprehensive timezone management 
+          solution for remote teams, international businesses, and global travelers. With precise time conversion 
+          between UTC, EST, IST, PST, and all major global timezones, you'll never have to wonder "what time is it there?" again.
+        </p>
+        <p className="text-slate mb-4">
+          Unlike other world clock tools, Sync My Clock lets you customize your view to show only the locations that matter 
+          to you. Add your team's locations, your company's international offices, or your upcoming travel destinations to 
+          see all relevant times at once. Perfect for planning global product launches, scheduling international conference calls, 
+          or coordinating with remote colleagues.
+        </p>
+        <h3 className="text-xl font-bold mt-6 mb-3 text-slate-light">Key Features of Our World Clock Tool:</h3>
+        <ul className="list-disc list-inside space-y-2 text-slate ml-4">
+          <li>Real-time updates with accurate time display for all major cities and timezones</li>
+          <li>Custom timezone selection - add only the locations you need</li>
+          <li>Time difference calculator to see the exact hours between locations</li>
+          <li>Date awareness to show when locations are on different calendar days</li>
+          <li>Daylight saving time automatic adjustments</li>
+          <li>Shareable timezone configurations for team coordination</li>
+        </ul>
       </section>
       
       <Footer />

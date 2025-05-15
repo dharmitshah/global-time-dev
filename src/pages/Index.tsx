@@ -1,8 +1,9 @@
+
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Clock, Globe, CalendarClock, Users } from 'lucide-react';
+import { Clock, Globe, CalendarClock, Users, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CurrentTime from '@/components/CurrentTime';
 import TimeConverter from '@/components/TimeConverter';
@@ -48,6 +49,58 @@ const Index = () => {
               <CalendarClock className="mr-2 h-4 w-4" />
               Parse Log Timestamps
             </Button>
+          </div>
+        </div>
+      </section>
+      
+      {/* NEW: Enhanced SEO Content Section */}
+      <section className="mb-12 bg-navy-light border border-slate-dark rounded-lg p-6 text-left">
+        <h2 className="text-2xl font-bold mb-4 text-slate-light">Why Use Sync My Clock Timezone Converter?</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <p className="text-slate mb-4">
+              <strong className="text-cyan">Sync My Clock</strong> is the ultimate free timezone conversion tool designed specifically for developers, remote teams, and global professionals who need accurate time synchronization across multiple regions.
+            </p>
+            <p className="text-slate mb-4">
+              Our comprehensive world clock and timezone converter eliminates the confusion of working across different timezones, whether you're converting UTC to local time, scheduling international meetings, or parsing timestamps from logs.
+            </p>
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center">
+                <CheckCircle2 className="h-5 w-5 text-cyan mr-2" />
+                <span className="text-slate-light">Instant timezone conversion for 200+ global regions</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle2 className="h-5 w-5 text-cyan mr-2" />
+                <span className="text-slate-light">Real-time world clock with custom timezone selection</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle2 className="h-5 w-5 text-cyan mr-2" />
+                <span className="text-slate-light">Advanced log timestamp parser for developers</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle2 className="h-5 w-5 text-cyan mr-2" />
+                <span className="text-slate-light">Team meeting scheduler across multiple timezones</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-bold mb-3 text-slate-light">How to Use Our Timezone Converter</h3>
+            <ol className="list-decimal list-inside space-y-2 text-slate">
+              <li>Select your source timezone (e.g., UTC, GMT, EST, IST)</li>
+              <li>Choose your target timezone for conversion</li>
+              <li>Enter the time you want to convert or use current time</li>
+              <li>Get instant, accurate timezone conversion results</li>
+            </ol>
+            <p className="mt-4 text-slate">
+              Whether you're coordinating software releases, scheduling international video calls, or simply need to check what time it is across the world, our timezone conversion tools provide the accuracy and simplicity you need.
+            </p>
+            <div className="mt-6">
+              <Link to="/time-zone-converter-for-developers">
+                <Button variant="outline" className="border-cyan text-cyan hover:bg-navy-dark">
+                  Learn More About Our Tools
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -156,6 +209,41 @@ const Index = () => {
         <LogParser />
       </section>
       
+      {/* NEW: User Cases Section for SEO */}
+      <section className="py-8 md:py-12">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
+          Who Uses Our Timezone Converter?
+        </h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Card className="border border-slate-dark bg-navy-light">
+            <CardContent className="p-6">
+              <h3 className="text-lg font-medium mb-2 text-cyan">Remote Development Teams</h3>
+              <p className="text-slate">
+                Software engineers and tech leads use our timezone tools to coordinate releases, schedule standups, and manage deployment windows across distributed teams. The timestamp parser helps debug logs from different regions.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="border border-slate-dark bg-navy-light">
+            <CardContent className="p-6">
+              <h3 className="text-lg font-medium mb-2 text-cyan">Global Project Managers</h3>
+              <p className="text-slate">
+                Project managers rely on Sync My Clock to schedule international meetings, track deadlines across regions, and ensure clear communication about timing with stakeholders worldwide.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="border border-slate-dark bg-navy-light">
+            <CardContent className="p-6">
+              <h3 className="text-lg font-medium mb-2 text-cyan">Digital Nomads & Travelers</h3>
+              <p className="text-slate">
+                Remote workers and travelers use our world clock to keep track of time back home, schedule calls with clients across time zones, and adapt to new local times while working internationally.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+      
       {/* Meeting scheduler call to action */}
       <section className="py-8 md:py-12">
         <div className="bg-navy-dark border border-slate-dark rounded-lg p-8 text-center">
@@ -257,6 +345,68 @@ console.log(date.toLocaleString('en-US', options));`}
               </p>
             </CardContent>
           </Card>
+        </div>
+      </section>
+      
+      {/* NEW: Backlinks and Resource Section */}
+      <section className="py-8 md:py-12">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
+          Resources & Further Reading
+        </h2>
+        <div className="bg-navy-light border border-slate-dark rounded-lg p-6">
+          <p className="text-slate mb-4">
+            Looking to learn more about time zones, international time management, or how to optimize your workflow across global teams? 
+            Check out these helpful resources:
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-slate">
+            <li>
+              <a href="/time-zone-history" className="text-cyan hover:underline">
+                The History of Time Zones: How We Track Time Globally
+              </a>
+            </li>
+            <li>
+              <a href="/business-hours-calculator" className="text-cyan hover:underline">
+                Business Hours Calculator: Find Overlapping Working Hours
+              </a>
+            </li>
+            <li>
+              <a href="/time-zone-travel-planner" className="text-cyan hover:underline">
+                Time Zone Travel Planner: Avoid Jet Lag and Schedule Better
+              </a>
+            </li>
+            <li>
+              <a href="https://www.timeanddate.com/worldclock/" className="text-cyan hover:underline" target="_blank" rel="noopener noreferrer">
+                TimeAndDate World Clock (External Resource)
+              </a>
+            </li>
+          </ul>
+          <div className="mt-6 bg-navy-dark p-4 rounded-lg">
+            <h3 className="text-lg font-medium mb-2 text-cyan">Share Sync My Clock with Your Team</h3>
+            <p className="text-slate mb-4">
+              Found our tools helpful? Share Sync My Clock with your colleagues, on social media, or in relevant forums 
+              for remote workers and developers. Helping others discover this free resource is greatly appreciated!
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button variant="outline" size="sm" className="border-slate-dark hover:bg-navy-dark hover:text-cyan">
+                <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20free%20timezone%20converter%20for%20developers%20and%20remote%20teams:%20https://syncmyclock.com" 
+                  target="_blank" rel="noopener noreferrer" className="flex items-center">
+                  Share on Twitter
+                </a>
+              </Button>
+              <Button variant="outline" size="sm" className="border-slate-dark hover:bg-navy-dark hover:text-cyan">
+                <a href="https://www.reddit.com/submit?url=https://syncmyclock.com&title=Free%20Timezone%20Converter%20for%20Developers%20and%20Remote%20Teams" 
+                  target="_blank" rel="noopener noreferrer" className="flex items-center">
+                  Share on Reddit
+                </a>
+              </Button>
+              <Button variant="outline" size="sm" className="border-slate-dark hover:bg-navy-dark hover:text-cyan">
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://syncmyclock.com" 
+                  target="_blank" rel="noopener noreferrer" className="flex items-center">
+                  Share on LinkedIn
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
       
