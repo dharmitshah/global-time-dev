@@ -34,10 +34,8 @@ export default defineConfig(({ mode }) => ({
             'date-fns-tz',
             '@tanstack/react-query'
           ],
-          // Split UI components
-          ui: [
-            '@/components/ui',
-          ],
+          // Split UI components - fix the import to reference specific files
+          ui: Object.keys(import.meta.glob('./src/components/ui/**/*.tsx')),
         },
       },
     },
