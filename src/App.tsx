@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +16,8 @@ import WorldClockSyncTool from "./pages/WorldClockSyncTool";
 import TimeZoneTravelPlanner from "./pages/TimeZoneTravelPlanner";
 import TimeZoneHistory from "./pages/TimeZoneHistory";
 import BusinessHoursCalculator from "./pages/BusinessHoursCalculator";
+import EventLinkPage from "./pages/EventLinkPage";
+import EventLinkViewPage from "./pages/EventLinkViewPage";
 import usePageMeta from "./hooks/usePageMeta";
 
 const queryClient = new QueryClient();
@@ -72,6 +75,8 @@ const AppRoutes = () => {
           <Route path="/time-zone-travel-planner" element={<TimeZoneTravelPlanner />} />
           <Route path="/time-zone-history" element={<TimeZoneHistory />} />
           <Route path="/business-hours-calculator" element={<BusinessHoursCalculator />} />
+          <Route path="/eventlink" element={<EventLinkPage />} />
+          <Route path="/eventlink/view/:id" element={<EventLinkViewPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
