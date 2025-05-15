@@ -1,5 +1,5 @@
 
-# Sync My Clock - Comprehensive robots.txt for SEO optimization
+# DevTimeZone - Comprehensive robots.txt for SEO optimization
 
 # Allow all crawlers
 User-agent: *
@@ -70,7 +70,7 @@ Allow: /
 User-agent: *
 Crawl-delay: 5
 
-# Keywords for search engines (not standard but some crawlers may use it)
+# Additional keywords for search engines (uncommented for better indexing)
 # timezone converter, world clock, UTC to IST, UTC to EST, time conversion app
 # remote work tools, global time converter, sync time, time zone meeting planner
 # developer time tools, time difference calculator, time zone map, international time

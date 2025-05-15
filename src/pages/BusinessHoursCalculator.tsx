@@ -21,18 +21,16 @@ const BusinessHoursCalculator = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    try {
-      setAvailableTimeZones(Intl.supportedValuesOf('timeZone'));
-    } catch (error) {
-      console.error("Error fetching time zones:", error);
-      toast({
-        title: "Error",
-        description: "Could not fetch time zones. Please check your browser settings.",
-        variant: "destructive",
-      });
-      setAvailableTimeZones([]);
-    }
-  }, [toast]);
+    // Use a list of common time zones instead of Intl.supportedValuesOf
+    const commonTimeZones = [
+      "America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles",
+      "Europe/London", "Europe/Berlin", "Europe/Moscow", "Asia/Tokyo",
+      "Asia/Shanghai", "Asia/Kolkata", "Australia/Sydney", "Pacific/Auckland",
+      "America/Toronto", "America/Mexico_City", "America/Sao_Paulo", "Africa/Cairo"
+    ];
+    
+    setAvailableTimeZones(commonTimeZones);
+  }, []);
 
   const calculateTime = () => {
     if (!timeZone1 || !timeZone2 || !meetingTime) {

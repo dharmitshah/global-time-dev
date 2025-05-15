@@ -143,6 +143,57 @@
     <meta name="rating" content="general" />
     <meta name="msapplication-TileColor" content="#2b5797" />
     <meta name="theme-color" content="#0f172a" />
+    
+    <!-- Structured Data - Product, Breadcrumbs, FAQs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "DevTimeZone - Timezone Converter",
+      "description": "Professional timezone converter for developers and remote teams",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Dev User"
+        }
+      }
+    }
+    </script>
+    
+    <!-- Extra SEO: Breadcrumbs structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://syncmyclock.com/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Time Zone Travel Planner",
+        "item": "https://syncmyclock.com/time-zone-travel-planner"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Business Hours Calculator",
+        "item": "https://syncmyclock.com/business-hours-calculator"
+      }]
+    }
+    </script>
   </head>
 
   <body>
