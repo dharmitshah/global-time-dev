@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import { Clock } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import TimeZoneCard from '@/components/TimeZoneCard';
+import TimeZoneSelector from '@/components/TimeZoneSelector';
 import { calculateArrivalTime } from '@/utils/timeZoneUtils';
 
 interface TravelTimeCalculatorProps {
@@ -87,23 +88,19 @@ const TravelTimeCalculator: React.FC<TravelTimeCalculatorProps> = ({
           
           <div className="grid gap-2">
             <Label htmlFor="departure-timezone">Departure Time Zone</Label>
-            <Input
-              type="text"
-              id="departure-timezone"
-              placeholder="Enter departure time zone (e.g. America/New_York)"
+            <TimeZoneSelector 
               value={departureTimeZone}
-              onChange={(e) => setDepartureTimeZone(e.target.value)}
+              onChange={setDepartureTimeZone}
+              selectedTimeZones={arrivalTimeZone ? [arrivalTimeZone] : []}
             />
           </div>
           
           <div className="grid gap-2">
             <Label htmlFor="arrival-timezone">Arrival Time Zone</Label>
-            <Input
-              type="text"
-              id="arrival-timezone"
-              placeholder="Enter arrival time zone (e.g. Europe/London)"
+            <TimeZoneSelector 
               value={arrivalTimeZone}
-              onChange={(e) => setArrivalTimeZone(e.target.value)}
+              onChange={setArrivalTimeZone}
+              selectedTimeZones={departureTimeZone ? [departureTimeZone] : []}
             />
           </div>
           

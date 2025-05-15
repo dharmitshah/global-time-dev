@@ -2,10 +2,10 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Moon } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import TimeZoneSelector from '@/components/TimeZoneSelector';
 import { JetlagResult } from '@/utils/timeZoneUtils';
 
 interface JetLagEstimatorProps {
@@ -43,23 +43,19 @@ const JetLagEstimator: React.FC<JetLagEstimatorProps> = ({
         
         <div className="grid gap-2">
           <Label htmlFor="departure-timezone-jetlag">Departure Time Zone</Label>
-          <Input
-            type="text"
-            id="departure-timezone-jetlag"
-            placeholder="Enter departure time zone (e.g. America/New_York)"
+          <TimeZoneSelector 
             value={departureTimeZone}
-            onChange={(e) => setDepartureTimeZone(e.target.value)}
+            onChange={setDepartureTimeZone}
+            selectedTimeZones={arrivalTimeZone ? [arrivalTimeZone] : []}
           />
         </div>
         
         <div className="grid gap-2">
           <Label htmlFor="arrival-timezone-jetlag">Arrival Time Zone</Label>
-          <Input
-            type="text"
-            id="arrival-timezone-jetlag"
-            placeholder="Enter arrival time zone (e.g. Europe/London)"
+          <TimeZoneSelector 
             value={arrivalTimeZone}
-            onChange={(e) => setArrivalTimeZone(e.target.value)}
+            onChange={setArrivalTimeZone}
+            selectedTimeZones={departureTimeZone ? [departureTimeZone] : []}
           />
         </div>
         
