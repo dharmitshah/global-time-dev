@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Clock, Globe, CalendarClock, Users, CheckCircle2 } from 'lucide-react';
+import { Clock, Globe, CalendarClock, Users, CheckCircle2, Link as LinkIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CurrentTime from '@/components/CurrentTime';
 import TimeConverter from '@/components/TimeConverter';
@@ -13,12 +13,12 @@ import Footer from '@/components/Footer';
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Hero section */}
+      {/* Hero section with proper H1 tag */}
       <section className="py-8 md:py-16">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-light mb-4">
-            Ultimate Time Zone <span className="text-cyan terminal-prompt">Converter & World Clock</span>
-          </h2>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-light mb-4">
+            Time Zone <span className="text-cyan terminal-prompt">Converter & World Clock</span>
+          </h1>
           <p className="text-lg text-slate mb-8 max-w-2xl mx-auto">
             Convert timestamps across global time zones, calculate time differences, and collaborate seamlessly with distributed teams. Free UTC to EST, UTC to IST converter.
           </p>
@@ -31,15 +31,16 @@ const Index = () => {
               <Clock className="mr-2 h-4 w-4" />
               Convert Time Zones
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-slate-dark hover:bg-navy-dark hover:text-cyan hover:border-cyan"
-              onClick={() => window.location.href = '/meeting-scheduler'}
-            >
-              <Users className="mr-2 h-4 w-4" />
-              Schedule Team Meetings
-            </Button>
+            <Link to="/meeting-scheduler">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-slate-dark hover:bg-navy-dark hover:text-cyan hover:border-cyan"
+              >
+                <Users className="mr-2 h-4 w-4" />
+                Schedule Team Meetings
+              </Button>
+            </Link>
             <Button 
               variant="secondary"
               size="lg" 
@@ -53,7 +54,7 @@ const Index = () => {
         </div>
       </section>
       
-      {/* NEW: Enhanced SEO Content Section */}
+      {/* Enhanced SEO Content Section with internal links */}
       <section className="mb-12 bg-navy-light border border-slate-dark rounded-lg p-6 text-left">
         <h2 className="text-2xl font-bold mb-4 text-slate-light">Why Use Sync My Clock Timezone Converter?</h2>
         <div className="grid md:grid-cols-2 gap-6">
@@ -62,7 +63,7 @@ const Index = () => {
               <strong className="text-cyan">Sync My Clock</strong> is the ultimate free timezone conversion tool designed specifically for developers, remote teams, and global professionals who need accurate time synchronization across multiple regions.
             </p>
             <p className="text-slate mb-4">
-              Our comprehensive world clock and timezone converter eliminates the confusion of working across different timezones, whether you're converting UTC to local time, scheduling international meetings, or parsing timestamps from logs.
+              Our comprehensive <Link to="/world-clock-sync-tool" className="text-cyan hover:underline">world clock</Link> and timezone converter eliminates the confusion of working across different timezones, whether you're converting <Link to="/utc-to-ist" className="text-cyan hover:underline">UTC to IST</Link>, <Link to="/utc-to-est" className="text-cyan hover:underline">UTC to EST</Link>, scheduling international meetings, or parsing timestamps from logs.
             </p>
             <div className="mt-4 space-y-2">
               <div className="flex items-center">
@@ -71,15 +72,15 @@ const Index = () => {
               </div>
               <div className="flex items-center">
                 <CheckCircle2 className="h-5 w-5 text-cyan mr-2" />
-                <span className="text-slate-light">Real-time world clock with custom timezone selection</span>
+                <Link to="/world-clock-sync-tool" className="text-slate-light hover:text-cyan">Real-time world clock with custom timezone selection</Link>
               </div>
               <div className="flex items-center">
                 <CheckCircle2 className="h-5 w-5 text-cyan mr-2" />
-                <span className="text-slate-light">Advanced log timestamp parser for developers</span>
+                <Link to="/time-zone-converter-for-developers" className="text-slate-light hover:text-cyan">Advanced log timestamp parser for developers</Link>
               </div>
               <div className="flex items-center">
                 <CheckCircle2 className="h-5 w-5 text-cyan mr-2" />
-                <span className="text-slate-light">Team meeting scheduler across multiple timezones</span>
+                <Link to="/meeting-scheduler" className="text-slate-light hover:text-cyan">Team meeting scheduler across multiple timezones</Link>
               </div>
             </div>
           </div>
@@ -105,6 +106,45 @@ const Index = () => {
         </div>
       </section>
       
+      {/* Popular Tools Quick Links for better internal linking */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-slate-light text-center">Popular Time Zone Tools</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Link to="/utc-to-ist">
+            <Card className="border border-slate-dark bg-navy-light hover:bg-navy-dark transition-colors">
+              <CardContent className="p-4 text-center">
+                <LinkIcon className="h-6 w-6 text-cyan mx-auto mb-2" />
+                <h3 className="font-medium">UTC to IST</h3>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/utc-to-est">
+            <Card className="border border-slate-dark bg-navy-light hover:bg-navy-dark transition-colors">
+              <CardContent className="p-4 text-center">
+                <LinkIcon className="h-6 w-6 text-cyan mx-auto mb-2" />
+                <h3 className="font-medium">UTC to EST</h3>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/meeting-scheduler">
+            <Card className="border border-slate-dark bg-navy-light hover:bg-navy-dark transition-colors">
+              <CardContent className="p-4 text-center">
+                <LinkIcon className="h-6 w-6 text-cyan mx-auto mb-2" />
+                <h3 className="font-medium">Meeting Planner</h3>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/business-hours-calculator">
+            <Card className="border border-slate-dark bg-navy-light hover:bg-navy-dark transition-colors">
+              <CardContent className="p-4 text-center">
+                <LinkIcon className="h-6 w-6 text-cyan mx-auto mb-2" />
+                <h3 className="font-medium">Business Hours</h3>
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
+      </section>
+      
       {/* SEO Rich Content */}
       <section className="mb-8 bg-navy-light border border-slate-dark rounded-lg p-6 text-left animate-fade-in">
         <h2 className="text-2xl font-bold mb-4 text-slate-light">Free Online Time Zone Converter & World Clock</h2>
@@ -114,14 +154,11 @@ const Index = () => {
           Stop Googling "time difference between UTC and EST" and start converting instantly.
         </p>
         <p className="text-slate mb-4">
-          Our timezone conversion tools include a powerful log timestamp parser, international meeting scheduler, and intuitive world clock app
+          Our timezone conversion tools include a powerful <Link to="/time-zone-converter-for-developers" className="text-cyan hover:underline">log timestamp parser</Link>, 
+          international <Link to="/meeting-scheduler" className="text-cyan hover:underline">meeting scheduler</Link>, and intuitive 
+          <Link to="/world-clock-sync-tool" className="text-cyan hover:underline"> world clock app</Link>
           to eliminate confusion when working across different regions. Perfect for software development teams, project managers, and digital nomads 
           who need accurate time conversion between EST, PST, UTC, GMT, IST and all major global timezones.
-        </p>
-        <p className="text-slate mb-4">
-          Time zone conversion and calculating time differences has never been easier. Whether you're scheduling international meetings, coordinating software releases,
-          or just trying to connect with colleagues abroad, our tool handles the complex calculations instantly. Convert any time from 
-          UTC to local time, plan meetings that work for everyone, and never miss a deadline due to time confusion again.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link to="/utc-to-ist">
@@ -135,6 +172,12 @@ const Index = () => {
           </Link>
           <Link to="/world-clock-sync-tool">
             <Badge variant="outline" className="hover:bg-navy-dark cursor-pointer">World Clock Sync</Badge>
+          </Link>
+          <Link to="/time-zone-history">
+            <Badge variant="outline" className="hover:bg-navy-dark cursor-pointer">Time Zone History</Badge>
+          </Link>
+          <Link to="/time-zone-travel-planner">
+            <Badge variant="outline" className="hover:bg-navy-dark cursor-pointer">Travel Planner</Badge>
           </Link>
         </div>
       </section>
@@ -151,41 +194,47 @@ const Index = () => {
         </h2>
         
         <div className="grid md:grid-cols-3 gap-6 mt-8">
-          <Card className="border border-slate-dark bg-navy-light">
-            <CardContent className="p-6">
-              <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
-                <Clock className="h-5 w-5 text-cyan" />
-              </div>
-              <h3 className="text-lg font-medium mb-2">World Clock & Time Zone Converter</h3>
-              <p className="text-sm text-slate">
-                Instantly convert times between multiple global time zones. UTC to EST, UTC to IST, and all major time zones supported.
-              </p>
-            </CardContent>
-          </Card>
+          <Link to="/world-clock-sync-tool" className="block">
+            <Card className="border border-slate-dark bg-navy-light hover:bg-navy-dark transition-colors h-full">
+              <CardContent className="p-6">
+                <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
+                  <Clock className="h-5 w-5 text-cyan" />
+                </div>
+                <h3 className="text-lg font-medium mb-2">World Clock & Time Zone Converter</h3>
+                <p className="text-sm text-slate">
+                  Instantly convert times between multiple global time zones. UTC to EST, UTC to IST, and all major time zones supported.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
           
-          <Card className="border border-slate-dark bg-navy-light">
-            <CardContent className="p-6">
-              <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
-                <CalendarClock className="h-5 w-5 text-cyan" />
-              </div>
-              <h3 className="text-lg font-medium mb-2">Log Timestamp Parser</h3>
-              <p className="text-sm text-slate">
-                Extract and convert timestamps from log files in various formats, including ISO 8601, Unix timestamps, and more.
-              </p>
-            </CardContent>
-          </Card>
+          <Link to="/time-zone-converter-for-developers" className="block">
+            <Card className="border border-slate-dark bg-navy-light hover:bg-navy-dark transition-colors h-full">
+              <CardContent className="p-6">
+                <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
+                  <CalendarClock className="h-5 w-5 text-cyan" />
+                </div>
+                <h3 className="text-lg font-medium mb-2">Log Timestamp Parser</h3>
+                <p className="text-sm text-slate">
+                  Extract and convert timestamps from log files in various formats, including ISO 8601, Unix timestamps, and more.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
           
-          <Card className="border border-slate-dark bg-navy-light">
-            <CardContent className="p-6">
-              <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
-                <Users className="h-5 w-5 text-cyan" />
-              </div>
-              <h3 className="text-lg font-medium mb-2">Global Meeting Planner</h3>
-              <p className="text-sm text-slate">
-                Find the perfect meeting time for your global team by visualizing overlapping working hours across time zones.
-              </p>
-            </CardContent>
-          </Card>
+          <Link to="/meeting-scheduler" className="block">
+            <Card className="border border-slate-dark bg-navy-light hover:bg-navy-dark transition-colors h-full">
+              <CardContent className="p-6">
+                <div className="h-10 w-10 rounded-full bg-cyan/10 flex items-center justify-center mb-4">
+                  <Users className="h-5 w-5 text-cyan" />
+                </div>
+                <h3 className="text-lg font-medium mb-2">Global Meeting Planner</h3>
+                <p className="text-sm text-slate">
+                  Find the perfect meeting time for your global team by visualizing overlapping working hours across time zones.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
       </section>
       
@@ -209,7 +258,7 @@ const Index = () => {
         <LogParser />
       </section>
       
-      {/* NEW: User Cases Section for SEO */}
+      {/* User Cases Section for SEO */}
       <section className="py-8 md:py-12">
         <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
           Who Uses Our Timezone Converter?
@@ -254,14 +303,15 @@ const Index = () => {
           <p className="text-slate mb-6 max-w-2xl mx-auto">
             Managing a distributed team? Find the best meeting times that work for everyone with our Meeting Scheduler tool.
           </p>
-          <Button
-            size="lg"
-            className="bg-cyan hover:bg-cyan-dark text-navy font-medium"
-            onClick={() => window.location.href = '/meeting-scheduler'}
-          >
-            <Users className="mr-2 h-4 w-4" />
-            Schedule Global Team Meetings
-          </Button>
+          <Link to="/meeting-scheduler">
+            <Button
+              size="lg"
+              className="bg-cyan hover:bg-cyan-dark text-navy font-medium"
+            >
+              <Users className="mr-2 h-4 w-4" />
+              Schedule Global Team Meetings
+            </Button>
+          </Link>
         </div>
       </section>
       
@@ -330,7 +380,7 @@ console.log(date.toLocaleString('en-US', options));`}
             <CardContent className="p-6">
               <h3 className="text-lg font-medium mb-2 text-cyan">How do I schedule meetings with teams in different time zones?</h3>
               <p className="text-slate">
-                Use our Meeting Scheduler tool to input the time zones of all team members. The tool will automatically 
+                Use our <Link to="/meeting-scheduler" className="text-cyan hover:underline">Meeting Scheduler tool</Link> to input the time zones of all team members. The tool will automatically 
                 find suitable meeting times that work for everyone, taking into account working hours and time differences.
               </p>
             </CardContent>
@@ -340,7 +390,7 @@ console.log(date.toLocaleString('en-US', options));`}
             <CardContent className="p-6">
               <h3 className="text-lg font-medium mb-2 text-cyan">How do I calculate time differences between time zones?</h3>
               <p className="text-slate">
-                Our Time Zone Calculator makes it easy to find the time difference between any two locations. Simply select the 
+                Our <Link to="/" className="text-cyan hover:underline">Time Zone Calculator</Link> makes it easy to find the time difference between any two locations. Simply select the 
                 two time zones you want to compare, and our tool will show you the current time in both zones and the exact hour difference.
               </p>
             </CardContent>
@@ -348,7 +398,7 @@ console.log(date.toLocaleString('en-US', options));`}
         </div>
       </section>
       
-      {/* NEW: Backlinks and Resource Section */}
+      {/* Backlinks and Resource Section */}
       <section className="py-8 md:py-12">
         <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center">
           Resources & Further Reading
@@ -360,19 +410,19 @@ console.log(date.toLocaleString('en-US', options));`}
           </p>
           <ul className="list-disc list-inside space-y-2 text-slate">
             <li>
-              <a href="/time-zone-history" className="text-cyan hover:underline">
+              <Link to="/time-zone-history" className="text-cyan hover:underline">
                 The History of Time Zones: How We Track Time Globally
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/business-hours-calculator" className="text-cyan hover:underline">
+              <Link to="/business-hours-calculator" className="text-cyan hover:underline">
                 Business Hours Calculator: Find Overlapping Working Hours
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/time-zone-travel-planner" className="text-cyan hover:underline">
+              <Link to="/time-zone-travel-planner" className="text-cyan hover:underline">
                 Time Zone Travel Planner: Avoid Jet Lag and Schedule Better
-              </a>
+              </Link>
             </li>
             <li>
               <a href="https://www.timeanddate.com/worldclock/" className="text-cyan hover:underline" target="_blank" rel="noopener noreferrer">

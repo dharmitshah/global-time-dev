@@ -8,34 +8,24 @@ Allow: /
 # Sitemap location
 Sitemap: https://syncmyclock.com/sitemap.xml
 
-# Additional Lovable preview domains
+# Primary domain
 Host: syncmyclock.com
-Host: id-preview--bb1c26dd-e814-4ee6-9f9f-5f605ff7d9a0.lovable.app
-Host: id-preview-4a8ac383--bb1c26dd-e814-4ee6-9f9f-5f605ff7d9a0.lovable.app
-Host: id-preview-1cb5b66d--bb1c26dd-e814-4ee6-9f9f-5f605ff7d9a0.lovable.app
-Host: id-preview-0e7e068c--bb1c26dd-e814-4ee6-9f9f-5f605ff7d9a0.lovable.app
-Host: id-preview-192d99cb--bb1c26dd-e814-4ee6-9f9f-5f605ff7d9a0.lovable.app
-Host: id-preview-61c25c64--bb1c26dd-e814-4ee6-9f9f-5f605ff7d9a0.lovable.app
 
 # Optimize for Google
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
 
 # Optimize for Google Images
 User-agent: Googlebot-Image
 Allow: /
-Crawl-delay: 1
 
 # Optimize for Google Mobile
 User-agent: Googlebot-Mobile
 Allow: /
-Crawl-delay: 1
 
 # Optimize for Bing
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 1
 
 # Social media crawlers
 User-agent: Twitterbot
@@ -45,9 +35,6 @@ User-agent: facebookexternalhit
 Allow: /
 
 User-agent: LinkedInBot
-Allow: /
-
-User-agent: Pinterest
 Allow: /
 
 # Additional crawlers
@@ -63,16 +50,8 @@ Allow: /
 User-agent: Baiduspider
 Allow: /
 
-# No delay for specific pages with important content
-User-agent: *
-Crawl-delay: 5
-
-# Keywords for search engines (uncommented for better indexing)
-# timezone converter, world clock, UTC to IST, UTC to EST, time conversion app
-# remote work tools, global time converter, sync time, time zone meeting planner
-# developer time tools, time difference calculator, time zone map, international time
-# global clock, military time converter, epoch time converter, unix timestamp converter
-# GMT converter, PST to EST, JST converter, AEST time converter, time zone api
-# daylight savings time calculator, timezone abbreviations, world time zones
-# meeting time finder, time zone conversion chart, time zone database
-# business hours calculator, international meeting planner, team timezone tracker
+# Important keywords
+# timezone converter, world clock, UTC to IST, UTC to EST
+# time conversion app, remote work tools, global time converter
+# developer time tools, time difference calculator, international time
+# meeting scheduler, time zone meeting planner, business hours calculator

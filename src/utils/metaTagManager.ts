@@ -122,9 +122,9 @@ export const updateMetaTags = (data: MetaTagData) => {
  */
 export const routeMetaData: Record<string, MetaTagData> = {
   '/': {
-    title: 'DevTimeZone - Best Free Online Timezone Converter | UTC to IST | UTC to EST | World Clock',
-    description: 'Convert time between time zones instantly. Free timezone calculator for developers, remote teams, and global businesses. UTC, EST, IST converter and world clock.',
-    keywords: 'timezone converter, world clock, UTC to IST, UTC to EST, time conversion app, remote work tools, global time converter, sync time, time zone meeting planner',
+    title: 'DevTimeZone - Free Timezone Converter | World Clock',
+    description: 'Convert time between time zones instantly. Free timezone calculator for developers and remote teams. UTC, EST, IST converter.',
+    keywords: 'timezone converter, world clock, UTC to IST, UTC to EST, time conversion app, remote work tools',
     ogTitle: 'DevTimeZone - Free Online Timezone Converter',
     ogDescription: 'Convert time between global timezones instantly. UTC to IST, UTC to EST converter.',
     ogType: 'website',
@@ -145,11 +145,11 @@ export const routeMetaData: Record<string, MetaTagData> = {
     }
   },
   '/meeting-scheduler': {
-    title: 'Global Meeting Scheduler | Find Optimal Meeting Times Across Time Zones | DevTimeZone',
-    description: 'Schedule meetings across multiple time zones effortlessly. Our meeting planner helps distributed teams find the best meeting times that work for everyone.',
-    keywords: 'meeting scheduler, global team meetings, international meeting planner, time zone meeting tool, schedule across time zones',
+    title: 'Meeting Scheduler | Time Zones Planner | DevTimeZone',
+    description: 'Schedule meetings across multiple time zones. Find optimal meeting times for distributed teams.',
+    keywords: 'meeting scheduler, global team meetings, international meeting planner',
     ogTitle: 'Schedule Global Team Meetings Across Time Zones',
-    ogDescription: 'Find the perfect meeting time for your international team with our time zone meeting scheduler.',
+    ogDescription: 'Find the perfect meeting time for your international team with our meeting scheduler.',
     ogType: 'website',
     ogImage: 'https://syncmyclock.com/og-image.png',
     jsonLd: {
@@ -165,9 +165,9 @@ export const routeMetaData: Record<string, MetaTagData> = {
     }
   },
   '/utc-to-ist': {
-    title: 'UTC to IST Converter | Convert UTC Time to Indian Standard Time | DevTimeZone',
-    description: 'Convert UTC to IST (Indian Standard Time) instantly. Free online UTC to IST converter for developers, remote teams working with India, and global professionals.',
-    keywords: 'UTC to IST, convert UTC to Indian time, Indian Standard Time converter, UTC IST difference, India time conversion',
+    title: 'UTC to IST Converter | Indian Standard Time | DevTimeZone',
+    description: 'Convert UTC to IST (Indian Standard Time) instantly. Free online UTC to IST converter.',
+    keywords: 'UTC to IST, convert UTC to Indian time, Indian Standard Time converter',
     ogTitle: 'UTC to IST Time Converter',
     ogDescription: 'Convert UTC time to Indian Standard Time (IST) instantly with our free online converter.',
     ogType: 'website',
@@ -179,9 +179,9 @@ export const routeMetaData: Record<string, MetaTagData> = {
     }
   },
   '/utc-to-est': {
-    title: 'UTC to EST Converter | Convert UTC to Eastern Standard Time | DevTimeZone',
-    description: 'Convert UTC to EST (Eastern Standard Time) instantly. Free online UTC to EST converter for developers, US-based businesses, and global teams.',
-    keywords: 'UTC to EST, convert UTC to Eastern time, Eastern Standard Time converter, UTC EST difference, US east coast time conversion',
+    title: 'UTC to EST Converter | Eastern Standard Time | DevTimeZone',
+    description: 'Convert UTC to EST (Eastern Standard Time) instantly. Free online UTC to EST converter.',
+    keywords: 'UTC to EST, convert UTC to Eastern time, Eastern Standard Time converter',
     ogTitle: 'UTC to EST Time Converter',
     ogDescription: 'Convert UTC time to Eastern Standard Time (EST) instantly with our free online converter.',
     ogType: 'website',
@@ -193,11 +193,11 @@ export const routeMetaData: Record<string, MetaTagData> = {
     }
   },
   '/time-zone-converter-for-developers': {
-    title: 'Developer Time Zone Tools | Timestamp Converter | Log Parser | DevTimeZone',
-    description: 'Essential timezone tools for developers. Convert timestamps, parse log files, and manage time across global development teams.',
-    keywords: 'developer timestamp tools, log time parser, programming time zone converter, epoch time, unix timestamp',
+    title: 'Developer Time Zone Tools | Timestamp Converter | DevTimeZone',
+    description: 'Essential timezone tools for developers. Convert timestamps, parse logs, manage time across teams.',
+    keywords: 'developer timestamp tools, log time parser, programming time zone converter',
     ogTitle: 'Time Zone Tools for Developers',
-    ogDescription: 'Essential timezone conversion tools and utilities designed specifically for software developers and engineering teams.',
+    ogDescription: 'Essential timezone conversion tools and utilities designed for software developers.',
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -207,9 +207,9 @@ export const routeMetaData: Record<string, MetaTagData> = {
     }
   },
   '/world-clock-sync-tool': {
-    title: 'World Clock | Global Time Zones | Current Time Worldwide | DevTimeZone',
-    description: 'View current time across multiple time zones simultaneously. Our World Clock helps you track time in different cities and regions around the globe.',
-    keywords: 'world clock, global time zones, international time, current time worldwide, multiple time zones',
+    title: 'World Clock | Global Time Zones | Current Time Worldwide',
+    description: 'View current time across multiple time zones simultaneously. Track time in different cities globally.',
+    keywords: 'world clock, global time zones, international time, current time worldwide',
     ogTitle: 'World Clock Sync Tool',
     ogDescription: 'View current time across multiple time zones simultaneously with our free online World Clock.',
     ogType: 'website',
@@ -221,11 +221,11 @@ export const routeMetaData: Record<string, MetaTagData> = {
     }
   },
   '/time-zone-travel-planner': {
-    title: 'Time Zone Travel Planner | Plan Trips Across Time Zones | DevTimeZone',
-    description: 'Plan your international travel with our Time Zone Travel Planner. Calculate time differences, jet lag, and best times for activities across time zones.',
-    keywords: 'time zone travel planner, jet lag calculator, international travel time, travel across time zones, flight time difference',
+    title: 'Time Zone Travel Planner | Plan Trips Across Time Zones',
+    description: 'Plan your international travel with our Time Zone Travel Planner. Calculate time differences and jet lag.',
+    keywords: 'time zone travel planner, jet lag calculator, international travel time',
     ogTitle: 'Time Zone Travel Planner',
-    ogDescription: 'Plan your international travel across time zones. Calculate time differences and manage jet lag with our time zone travel tool.',
+    ogDescription: 'Plan your international travel across time zones. Calculate time differences and manage jet lag.',
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -235,11 +235,11 @@ export const routeMetaData: Record<string, MetaTagData> = {
     }
   },
   '/time-zone-history': {
-    title: 'History of Time Zones | Evolution of Global Time | DevTimeZone',
-    description: 'Explore the fascinating history of time zones. Learn about the development of standard time, international date line, and how time zone systems evolved.',
-    keywords: 'time zone history, standard time history, international date line, GMT history, UTC development',
+    title: 'History of Time Zones | Evolution of Global Time',
+    description: 'Explore the history of time zones. Learn about standard time development and time zone evolution.',
+    keywords: 'time zone history, standard time history, international date line',
     ogTitle: 'History of Time Zones',
-    ogDescription: 'Explore the fascinating evolution of global time zones from local solar time to our modern synchronized system.',
+    ogDescription: 'Explore the fascinating evolution of global time zones from local solar time to our modern system.',
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -253,9 +253,9 @@ export const routeMetaData: Record<string, MetaTagData> = {
     }
   },
   '/business-hours-calculator': {
-    title: 'Business Hours Calculator | Working Hours Across Time Zones | DevTimeZone',
-    description: 'Calculate overlapping business hours across different time zones. Our tool helps global teams find optimal collaboration times that respect working hours.',
-    keywords: 'business hours calculator, working hours time zones, overlapping business hours, global team working time, international business hours',
+    title: 'Business Hours Calculator | Working Hours Across Time Zones',
+    description: 'Calculate overlapping business hours across time zones. Find optimal global team collaboration times.',
+    keywords: 'business hours calculator, working hours time zones, overlapping business hours',
     ogTitle: 'Business Hours Calculator',
     ogDescription: 'Calculate overlapping business hours across different time zones for optimal global team collaboration.',
     ogType: 'website',
