@@ -8,10 +8,11 @@ import { useState } from 'react';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TimeZoneSelector from '@/components/TimeZoneSelector';
-import { toast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
 
 const TimeZoneTravelPlanner = () => {
+  const { toast } = useToast();
   const [departureZone, setDepartureZone] = useState('UTC');
   const [destinationZone, setDestinationZone] = useState('America/New_York');
   const [departureDate, setDepartureDate] = useState(new Date());

@@ -6,7 +6,7 @@ import { Clock, Calendar, Building2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import TimeZoneSelector from '@/components/TimeZoneSelector';
-import { toast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { format, addHours } from 'date-fns';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -24,6 +24,7 @@ type Region = {
 };
 
 const BusinessHoursCalculator = () => {
+  const { toast } = useToast();
   const [regions, setRegions] = useState<Region[]>([
     { name: 'New York', timeZone: 'America/New_York', businessHours: { start: 9, end: 17 }, color: 'bg-blue-500' },
     { name: 'London', timeZone: 'Europe/London', businessHours: { start: 9, end: 17 }, color: 'bg-green-500' },
