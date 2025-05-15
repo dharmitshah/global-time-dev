@@ -48,8 +48,15 @@ const Navigation = () => {
     <nav className="border-b border-slate-dark bg-navy py-3 sticky top-0 z-50">
       <div className="container max-w-6xl px-4 mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <Clock className="h-6 w-6 text-cyan" />
-          <h1 className="text-xl font-bold tracking-tight text-slate-light">DevTimeZone</h1>
+          {/* Updated to use the logo image for better indexing */}
+          <img 
+            src="/logo.svg" 
+            alt="DevTimeZone Logo - Time Zone Converter Tool" 
+            className="h-6" 
+            width="150" 
+            height="30"
+          />
+          <span className="sr-only">DevTimeZone - Time Zone Converter Tool</span>
         </Link>
 
         {/* Desktop Navigation */}
