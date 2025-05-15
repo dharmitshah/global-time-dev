@@ -2,10 +2,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem } from '@/components/ui/menubar';
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from '@/components/ui/navigation-menu';
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
-import { Clock, Menu, ChevronDown } from 'lucide-react';
+import { Clock, Menu } from 'lucide-react';
 
 const routes = [
   { name: 'Home', path: '/' },

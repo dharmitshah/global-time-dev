@@ -25,19 +25,21 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Navigation />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/meeting-scheduler" element={<MeetingSchedulerPage />} />
-          <Route path="/utc-to-ist" element={<UTCtoIST />} />
-          <Route path="/utc-to-est" element={<UTCtoEST />} />
-          <Route path="/time-zone-converter-for-developers" element={<TimeZoneConverterForDevelopers />} />
-          <Route path="/world-clock-sync-tool" element={<WorldClockSyncTool />} />
-          <Route path="/time-zone-travel-planner" element={<TimeZoneTravelPlanner />} />
-          <Route path="/time-zone-history" element={<TimeZoneHistory />} />
-          <Route path="/business-hours-calculator" element={<BusinessHoursCalculator />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <main className="container max-w-6xl mx-auto px-4 py-8">
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/meeting-scheduler" element={<MeetingSchedulerPage />} />
+            <Route path="/utc-to-ist" element={<UTCtoIST />} />
+            <Route path="/utc-to-est" element={<UTCtoEST />} />
+            <Route path="/time-zone-converter-for-developers" element={<TimeZoneConverterForDevelopers />} />
+            <Route path="/world-clock-sync-tool" element={<WorldClockSyncTool />} />
+            <Route path="/time-zone-travel-planner" element={<TimeZoneTravelPlanner />} />
+            <Route path="/time-zone-history" element={<TimeZoneHistory />} />
+            <Route path="/business-hours-calculator" element={<BusinessHoursCalculator />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
