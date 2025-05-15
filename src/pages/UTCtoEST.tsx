@@ -14,7 +14,7 @@ const UTCtoEST = () => {
           <div className="flex justify-between items-center">
             <Link to="/" className="flex items-center gap-2">
               <Clock className="h-6 w-6 text-cyan" />
-              <h1 className="text-xl font-bold tracking-tight">Sync My Clock</h1>
+              <h1 className="text-xl font-bold tracking-tight">DevTimeZone</h1>
             </Link>
             <div className="flex items-center gap-2">
               <span className="hidden sm:inline text-sm text-slate">UTC to EST Converter</span>
