@@ -9,6 +9,7 @@ import TimeConverter from '@/components/TimeConverter';
 import LogParser from '@/components/LogParser';
 import Footer from '@/components/Footer';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import EmbedCodeGenerator from '@/components/EmbedCodeGenerator';
 
 const Index = () => {
   return (
@@ -185,6 +186,15 @@ const Index = () => {
       {/* Current time card */}
       <section className="mb-12">
         <CurrentTime className="max-w-md mx-auto" />
+      </section>
+      
+      {/* Embed Code Generator section - NEW SECTION */}
+      <section className="py-8 md:py-12">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-light mb-6 text-center flex items-center justify-center gap-2">
+          <LinkIcon className="h-6 w-6 text-cyan" />
+          <span>Embed Tools In Your Workspace</span>
+        </h2>
+        <EmbedCodeGenerator />
       </section>
       
       {/* Features section */}
