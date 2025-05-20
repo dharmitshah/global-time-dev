@@ -18,6 +18,8 @@ import TimeZoneHistory from "./pages/TimeZoneHistory";
 import BusinessHoursCalculator from "./pages/BusinessHoursCalculator";
 import EventLinkPage from "./pages/EventLinkPage";
 import EventLinkViewPage from "./pages/EventLinkViewPage";
+import LoginPage from "./pages/LoginPage";
+import AdminPage from "./pages/AdminPage";
 import usePageMeta from "./hooks/usePageMeta";
 
 const queryClient = new QueryClient();
@@ -77,6 +79,8 @@ const AppRoutes = () => {
           <Route path="/business-hours-calculator" element={<BusinessHoursCalculator />} />
           <Route path="/eventlink" element={<EventLinkPage />} />
           <Route path="/eventlink/view/:id" element={<EventLinkViewPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

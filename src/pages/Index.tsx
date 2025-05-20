@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,6 +8,7 @@ import CurrentTime from '@/components/CurrentTime';
 import TimeConverter from '@/components/TimeConverter';
 import LogParser from '@/components/LogParser';
 import Footer from '@/components/Footer';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 const Index = () => {
   return (
@@ -236,6 +236,11 @@ const Index = () => {
             </Card>
           </Link>
         </div>
+      </section>
+      
+      {/* Newsletter signup */}
+      <section className="py-8 md:py-12">
+        <NewsletterSignup />
       </section>
       
       <Separator className="my-10 bg-slate-dark" />
